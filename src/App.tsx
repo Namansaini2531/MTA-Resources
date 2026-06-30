@@ -98,51 +98,67 @@ const FeaturedResources = () => (
 );
 
 const LatestBlogs = () => (
-    <section className="latest-blogs">
+    <section className="blogs-section">
         <div className="container">
             <div className="section-header">
-                <h2>Latest Blogs</h2>
-                <a href="#" className="view-all">View all ↗</a>
+                <h2>Blogs</h2>
+                <a href="#" className="view-all-btn">View All &rarr;</a>
             </div>
-            <div className="blogs-grid">
-                <a href="#" className="blog-card featured-blog">
-                    <div className="card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&q=80&w=800')" }}></div>
-                    <div className="card-content">
-                        <div className="tags">
-                            <span className="tag">AI</span>
+            <div className="blogs-layout">
+                {/* Left Column - Large Cards */}
+                <div className="blogs-left-col">
+                    <a href="#" className="large-blog-card">
+                        <div className="card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800')" }}></div>
+                        <div className="card-content-no-bg">
+                            <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
+                            <h3>GitHub Profile Checklist 2026: What Recruiters Actually Look At</h3>
+                            <p className="blog-desc">GitHub can be a powerful job-search asset — for freshers and career-switchers especially, it's often the proof that you can actually build things.</p>
                         </div>
-                        <h3>AI Tools Every Marketer Should Learn</h3>
-                        <p>Discover the top AI tools that are transforming the marketing landscape.</p>
-                        <p className="date">Apr 12, 2026</p>
-                    </div>
-                </a>
-                <div className="compact-blogs">
+                    </a>
+                    <a href="#" className="large-blog-card">
+                        <div className="card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800')" }}></div>
+                        <div className="card-content-no-bg">
+                            <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
+                            <h3>Resume Headline & Summary 2026: Examples, Templates & Action Verbs</h3>
+                            <p className="blog-desc">The top third of your resume gets read first and decides whether the rest gets read at all. This guide shows you the modern alternative.</p>
+                        </div>
+                    </a>
+                </div>
+                {/* Right Column - Compact Cards */}
+                <div className="blogs-right-col">
                     <a href="#" className="compact-blog-card">
-                        <div className="compact-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&q=80&w=200')" }}></div>
+                        <div className="compact-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&q=80&w=200')" }}></div>
                         <div className="compact-content">
-                            <h4>How to Build a Marketing Portfolio</h4>
-                            <span className="tag">Career</span>
+                            <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
+                            <h4>Product Manager Resume 2026: What Hiring Managers Actually Read</h4>
+                        </div>
+                    </a>
+                    <a href="#" className="compact-blog-card shadow-card">
+                        <div className="compact-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=200')" }}></div>
+                        <div className="compact-content">
+                            <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
+                            <h4>LinkedIn Profile Optimization 2026: Get Recruiters to Message You</h4>
                         </div>
                     </a>
                     <a href="#" className="compact-blog-card">
-                        <div className="compact-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=200')" }}></div>
+                        <div className="compact-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=200')" }}></div>
                         <div className="compact-content">
-                            <h4>Client Communication Tips</h4>
-                            <span className="tag">Management</span>
+                            <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
+                            <h4>Career Gap on Resume: How to Explain It Honestly (2026)</h4>
                         </div>
                     </a>
                     <a href="#" className="compact-blog-card">
-                        <div className="compact-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1432888498266-38ffec3eaf0a?auto=format&fit=crop&q=80&w=200')" }}></div>
+                        <div className="compact-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=200')" }}></div>
                         <div className="compact-content">
-                            <h4>AI era: Boon or Bane</h4>
-                            <span className="tag">Opinion</span>
+                            <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
+                            <h4>How to List Projects on a Tech Resume (2026 Examples)</h4>
                         </div>
                     </a>
                     <a href="#" className="compact-blog-card">
-                        <div className="compact-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=200')" }}></div>
+                        <div className="compact-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=200')" }}></div>
                         <div className="compact-content">
-                            <h4>UI/UX designer salary insights</h4>
-                            <span className="tag">Salary</span>
+                            <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
+                            <h4>Cover Letter for Indian Tech Jobs 2026: Template + When to Skip It</h4>
                         </div>
                     </a>
                 </div>
