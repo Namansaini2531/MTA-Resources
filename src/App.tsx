@@ -202,46 +202,63 @@ const LatestBlogs = () => (
 const ReportsSection = () => (
     <section className="reports-section bg-light">
         <div className="container">
-            <h2>Reports & E-books</h2>
-            <div className="reports-grid">
-                <div className="report-card">
-                    <div className="report-cover" style={{ backgroundColor: "#fce4e4" }}>
-                        <span className="report-icon">📄</span>
-                    </div>
-                    <div className="report-content">
-                        <h3>State of Marketing Report</h3>
-                        <p>An in-depth look at marketing trends for the upcoming year.</p>
-                        <a href="#" className="download-btn">Download ↓</a>
-                    </div>
-                </div>
-                <div className="report-card">
-                    <div className="report-cover" style={{ backgroundColor: "#e4f0fc" }}>
-                        <span className="report-icon">📘</span>
-                    </div>
-                    <div className="report-content">
-                        <h3>Agency Growth Handbook</h3>
-                        <p>Strategies to scale your marketing agency effectively.</p>
-                        <a href="#" className="download-btn">Download ↓</a>
+            <div className="section-header">
+                <h2>E-books & Reports</h2>
+                <a href="#" className="view-all-btn">View All &rarr;</a>
+            </div>
+            
+            {/* Top row - 2 large cards */}
+            <div className="reports-top-grid">
+                <div className="report-card large-card">
+                    <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&q=80&w=600')" }}></div>
+                    <div className="report-info">
+                        <p className="report-meta">Talent Intelligence &nbsp;|&nbsp; &lt;1 min</p>
+                        <h3>State Of Non-Tech Talent 2025</h3>
+                        <p className="report-desc">Discover real salary benchmarks from India's top product companies. The Product Tech PayCheck 2025 helps recruiters, HR teams, and founders win tech talent with confidence.</p>
+                        <a href="#" className="download-link">Download now <span className="arrow">↓</span></a>
                     </div>
                 </div>
-                <div className="report-card">
-                    <div className="report-cover" style={{ backgroundColor: "#eefce4" }}>
-                        <span className="report-icon">📊</span>
-                    </div>
-                    <div className="report-content">
-                        <h3>Digital Marketing Trends</h3>
-                        <p>What to expect in SEO, paid ads, and content.</p>
-                        <a href="#" className="download-btn">Download ↓</a>
+                
+                <div className="report-card large-card">
+                    <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&q=80&w=600')" }}></div>
+                    <div className="report-info">
+                        <p className="report-meta">Talent Intelligence &nbsp;|&nbsp; &lt;1 min</p>
+                        <h3>The 2025 Bharat Salary Index [Non-Tech Skills]</h3>
+                        <p className="report-desc">Compensation benchmarks and real salary data from top companies across India's industries.</p>
+                        <a href="#" className="download-link">Download now <span className="arrow">↓</span></a>
                     </div>
                 </div>
-                <div className="report-card">
-                    <div className="report-cover" style={{ backgroundColor: "#fce4f4" }}>
-                        <span className="report-icon">📈</span>
+            </div>
+
+            {/* Bottom row - 3 compact cards */}
+            <div className="reports-bottom-grid">
+                <div className="report-card compact-card">
+                    <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1559526324-c1f24563d72b?auto=format&fit=crop&q=80&w=600')" }}></div>
+                    <div className="report-info">
+                        <p className="report-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
+                        <h4>Product Tech PayCheck 2025</h4>
+                        <p className="report-desc">Discover real salary trends from 10,000+ verified offers across India's top product companies. Plan better offers and avoid...</p>
+                        <a href="#" className="download-link">Download now <span className="arrow">↓</span></a>
                     </div>
-                    <div className="report-content">
-                        <h3>Tech Salary Index</h3>
-                        <p>Comprehensive salary data for marketing roles.</p>
-                        <a href="#" className="download-btn">Download ↓</a>
+                </div>
+                
+                <div className="report-card compact-card">
+                    <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=600')" }}></div>
+                    <div className="report-info">
+                        <p className="report-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
+                        <h4>State Of ITeS Tech Talent 2025</h4>
+                        <p className="report-desc">This report is the ultimate guide for hiring managers, recruiters, and HR professionals who want to stay ahead of the curve an...</p>
+                        <a href="#" className="download-link">Download now <span className="arrow">↓</span></a>
+                    </div>
+                </div>
+
+                <div className="report-card compact-card">
+                    <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=600')" }}></div>
+                    <div className="report-info">
+                        <p className="report-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
+                        <h4>Tech Salary Index 2025</h4>
+                        <p className="report-desc">This index is a highlight-filled quick reference for hiring managers, recruiters, and HR professionals who want to beat...</p>
+                        <a href="#" className="download-link">Download now <span className="arrow">↓</span></a>
                     </div>
                 </div>
             </div>
