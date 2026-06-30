@@ -134,7 +134,7 @@ const LatestBlogs = () => (
         <div className="container">
             <div className="section-header">
                 <h2>Blogs</h2>
-                <a href="#" className="view-all-btn">View All &rarr;</a>
+                <a href="https://mar-tech-adda-blog-frontend-a4ql.vercel.app/" className="view-all-btn">View All &rarr;</a>
             </div>
             <div className="blogs-layout">
                 {/* Left Column - Large Cards */}
