@@ -233,7 +233,7 @@ const ReportsSection = () => (
             {/* Bottom row - 3 compact cards */}
             <div className="reports-bottom-grid">
                 <div className="report-card compact-card">
-                    <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1559526324-c1f24563d72b?auto=format&fit=crop&q=80&w=600')" }}></div>
+                    <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=600')" }}></div>
                     <div className="report-info">
                         <p className="report-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
                         <h4>Product Tech PayCheck 2025</h4>
