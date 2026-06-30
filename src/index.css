@@ -249,6 +249,13 @@ h4 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
     padding: 80px 0;
 }
 
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
 .view-all-btn {
     border: 1px solid #00a082;
     color: #00a082;
