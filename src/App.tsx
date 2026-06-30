@@ -48,7 +48,7 @@ const FeaturedResources = () => (
     <section className="featured-resources-section">
         <div className="container">
             <h2 className="featured-title">Featured Resources</h2>
-            
+
             {/* Top row - large highlighted resource */}
             <div className="featured-hero">
                 <div className="featured-hero-image-container">
@@ -79,7 +79,7 @@ const FeaturedResources = () => (
                         <p className="featured-date">Apr 3, 2026</p>
                     </div>
                 </a>
-                
+
                 <a href="#" className="resource-card">
                     <div className="resource-card-image-container">
                         <div className="resource-card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600')" }}></div>
