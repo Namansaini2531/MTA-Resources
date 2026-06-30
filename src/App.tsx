@@ -326,6 +326,7 @@ const Footer = () => (
             <div className="footer-links-column">
                 <h4>Platform</h4>
                 <a href="#">Home</a>
+                <a href="#">Resources</a>
                 <a href="#">About Us</a>
                 <a href="#">How It Works</a>
                 <a href="#">Why This Works</a>
