@@ -257,9 +257,13 @@ const VideoTutorials = () => (
                         <div className="play-icon">▶</div>
                         <span className="duration">12:30</span>
                     </div>
-                    <div className="video-info">
-                        <span className="tag">Platform</span>
-                        <h3>Website Walkthrough</h3>
+                    <div className="video-details">
+                        <div className="channel-avatar" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100')" }}></div>
+                        <div className="video-meta">
+                            <h3 className="video-title">Website Walkthrough</h3>
+                            <p className="channel-name">MarTechAdda • Platform</p>
+                            <p className="video-stats">1.5K views • 1 month ago</p>
+                        </div>
                     </div>
                 </a>
                 <a href="https://youtube.com" target="_blank" rel="noreferrer" className="video-card">
@@ -267,9 +271,13 @@ const VideoTutorials = () => (
                         <div className="play-icon">▶</div>
                         <span className="duration">08:15</span>
                     </div>
-                    <div className="video-info">
-                        <span className="tag">Setup</span>
-                        <h3>How to Setup your MarTechAdda profile</h3>
+                    <div className="video-details">
+                        <div className="channel-avatar" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=100')" }}></div>
+                        <div className="video-meta">
+                            <h3 className="video-title">How to Setup your MarTechAdda profile</h3>
+                            <p className="channel-name">MarTechAdda Academy • Setup</p>
+                            <p className="video-stats">820 views • 2 weeks ago</p>
+                        </div>
                     </div>
                 </a>
                 <a href="https://youtube.com" target="_blank" rel="noreferrer" className="video-card">
@@ -277,9 +285,13 @@ const VideoTutorials = () => (
                         <div className="play-icon">▶</div>
                         <span className="duration">15:45</span>
                     </div>
-                    <div className="video-info">
-                        <span className="tag">Career</span>
-                        <h3>Personal Branding Masterclass</h3>
+                    <div className="video-details">
+                        <div className="channel-avatar" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=100')" }}></div>
+                        <div className="video-meta">
+                            <h3 className="video-title">Personal Branding Masterclass</h3>
+                            <p className="channel-name">Expert Series • Career</p>
+                            <p className="video-stats">4.2K views • 6 months ago</p>
+                        </div>
                     </div>
                 </a>
                 <a href="https://youtube.com" target="_blank" rel="noreferrer" className="video-card">
@@ -287,9 +299,13 @@ const VideoTutorials = () => (
                         <div className="play-icon">▶</div>
                         <span className="duration">10:05</span>
                     </div>
-                    <div className="video-info">
-                        <span className="tag">Hiring</span>
-                        <h3>Tips to find the best Marketing expert</h3>
+                    <div className="video-details">
+                        <div className="channel-avatar" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=100')" }}></div>
+                        <div className="video-meta">
+                            <h3 className="video-title">Tips to find the best Marketing expert</h3>
+                            <p className="channel-name">MarTechAdda Business • Hiring</p>
+                            <p className="video-stats">3.1K views • 4 weeks ago</p>
+                        </div>
                     </div>
                 </a>
             </div>
