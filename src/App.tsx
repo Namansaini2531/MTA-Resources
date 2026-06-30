@@ -287,56 +287,97 @@ const Newsletter = () => (
 
 const Footer = () => (
     <footer className="main-footer">
-        <div className="container footer-container">
-            <div className="footer-logo-col">
-                <div className="footer-logo">MarTechAdda</div>
-                <div className="social-links">
-                    <a href="#">Fb</a>
-                    <a href="#">Tw</a>
-                    <a href="#">Li</a>
-                    <a href="#">In</a>
-                    <a href="#">Yt</a>
+        <div className="container footer-top">
+            <div className="footer-brand-col">
+                <div className="footer-logo-svg">
+                    <svg width="84" height="60" viewBox="0 0 84 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        {/* Teal / Mint Ring */}
+                        <circle cx="26" cy="38" r="12" stroke="#2bc0a4" strokeWidth="3.5" fill="none" />
+                        <circle cx="26" cy="18" r="4" fill="#2bc0a4" />
+
+                        {/* Charcoal Ring */}
+                        <circle cx="42" cy="38" r="12" stroke="#e5e7eb" strokeWidth="3.5" fill="none" />
+                        <circle cx="42" cy="18" r="4" fill="#e5e7eb" />
+
+                        {/* Coral / Orange Ring */}
+                        <circle cx="58" cy="38" r="12" stroke="#ff7043" strokeWidth="3.5" fill="none" />
+                        <circle cx="58" cy="18" r="4" fill="#ff7043" />
+                    </svg>
+                </div>
+                <p className="footer-desc">
+                    Built for businesses and marketing professionals. A neutral, marketing-only platform designed for clarity before commitment.
+                </p>
+                <p className="footer-service">
+                    Service availability (current phase):<strong>Currently serving across the Mumbai Metropolitan Region (MMR).</strong>
+                </p>
+                <div className="footer-social-icons">
+                    <a href="#" className="social-icon-btn"><span className="icon-in">in</span></a>
+                    <a href="#" className="social-icon-btn">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-instagram">
+                            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                        </svg>
+                    </a>
+                    <a href="#" className="social-icon-btn"><span className="icon-f">f</span></a>
                 </div>
             </div>
-            <div className="footer-links-col">
-                <h4>For Clients</h4>
-                <a href="#">How to hire</a>
-                <a href="#">Talent Marketplace</a>
-                <a href="#">Project Catalog</a>
-                <a href="#">Hire an agency</a>
-                <a href="#">Enterprise</a>
-            </div>
-            <div className="footer-links-col">
-                <h4>For Talent</h4>
-                <a href="#">How to find work</a>
-                <a href="#">Direct Contracts</a>
-                <a href="#">Find freelance jobs worldwide</a>
-            </div>
-            <div className="footer-links-col">
-                <h4>Resources</h4>
-                <a href="#">Help & Support</a>
-                <a href="#">Success Stories</a>
-                <a href="#">Upwork Reviews</a>
-                <a href="#">Resources</a>
-                <a href="#">Blog</a>
-            </div>
-            <div className="footer-links-col">
-                <h4>Company</h4>
+
+            <div className="footer-links-column">
+                <h4>Platform</h4>
+                <a href="#">Home</a>
                 <a href="#">About Us</a>
-                <a href="#">Leadership</a>
-                <a href="#">Investor Relations</a>
-                <a href="#">Careers</a>
-                <a href="#">Our Impact</a>
+                <a href="#">How It Works</a>
+                <a href="#">Why This Works</a>
+                <a href="#">Join as an Expert</a>
+                <a href="#">Login</a>
+            </div>
+
+            <div className="footer-links-column">
+                <h4>Support</h4>
+                <a href="#">FAQs</a>
+                <a href="#">Contact Us</a>
+                <a href="#">Feedback</a>
+            </div>
+
+            <div className="footer-links-column">
+                <h4>Legal</h4>
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Refund & Cancellation Policy</a>
             </div>
         </div>
-        <div className="container footer-bottom">
-            <p>&copy; 2026 MarTechAdda Global Inc.</p>
-            <div className="legal-links">
-                <a href="#">Terms of Service</a>
-                <a href="#">Privacy Policy</a>
-                <a href="#">CA Notice at Collection</a>
-                <a href="#">Cookie Settings</a>
-                <a href="#">Accessibility</a>
+
+        <hr className="footer-divider" />
+
+        <div className="container footer-bottom-meta">
+            <div className="footer-bottom-left">
+                <strong>MarTechAdda Private Limited</strong>
+                <p className="address">
+                    <svg className="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M12 2a8 8 0 0 0-8 8c0 5.25 8 12 8 12s8-6.75 8-12a8 8 0 0 0-8-8z"></path>
+                        <circle cx="12" cy="10" r="3"></circle>
+                    </svg>
+                    A-1702, 17th FLR, Parinee Crescenzo, Bandra Kurla Complex (BKC), Mumbai – 400051, Maharashtra, India
+                </p>
+                <p className="email">
+                    <svg className="meta-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                        <polyline points="22,6 12,13 2,6"></polyline>
+                    </svg>
+                    <a href="mailto:support@martechadda.com">support@martechadda.com</a>
+                </p>
+            </div>
+
+            <div className="footer-bottom-middle">
+                <p>CIN: U62099MH2025PTC456979</p>
+                <p>GSTIN: 27AATCM871681Z6</p>
+                <p>Udyam: UDYAM-MH-19-0393544</p>
+                <p>DPIIT Startup India: DIPP237729</p>
+            </div>
+
+            <div className="footer-bottom-right">
+                <p>&copy; 2026 MarTechAdda Private Limited. All rights reserved.</p>
             </div>
         </div>
     </footer>
