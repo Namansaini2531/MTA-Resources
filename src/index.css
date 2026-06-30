@@ -141,9 +141,11 @@ h4 {
     background-size: cover;
     background-position: center;
     border-radius: 32px;
-    padding: 100px 60px;
+    padding: 160px 80px;
     position: relative;
     overflow: hidden;
+    display: flex;
+    align-items: center;
 }
 
 .hero-banner::before {
@@ -165,11 +167,16 @@ h4 {
 
 .hero-content h1 {
     color: white;
+    font-size: 3.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
 }
 
 .hero-content p {
     font-size: 1.25rem;
     color: white;
+    margin: 0;
 }
 
 /* 2. Explore Popular Topics */
