@@ -50,6 +50,7 @@ const HeroSection = () => (
 const PopularTopics = () => (
     <section className="popular-topics">
         <div className="container">
+            <span className="section-label">TOPICS</span>
             <h2>Explore popular topics</h2>
             <div className="topic-chips">
                 <a href="#" className="chip">Marketing Automation</a>
@@ -64,6 +65,7 @@ const PopularTopics = () => (
 const FeaturedResources = () => (
     <section className="featured-resources-section">
         <div className="container">
+            <span className="section-label">HIGHLIGHTS</span>
             <h2 className="featured-title">Featured Resources</h2>
 
             {/* Top row - large highlighted resource */}
@@ -132,6 +134,7 @@ const FeaturedResources = () => (
 const LatestBlogs = () => (
     <section className="blogs-section">
         <div className="container">
+            <span className="section-label">BLOGS</span>
             <div className="section-header">
                 <h2>Blogs</h2>
                 <a href="https://mar-tech-adda-blog-frontend-a4ql.vercel.app/" className="view-all-btn">View All &rarr;</a>
@@ -202,6 +205,7 @@ const LatestBlogs = () => (
 const ReportsSection = () => (
     <section className="reports-section bg-light">
         <div className="container">
+            <span className="section-label">RESOURCES</span>
             <div className="section-header">
                 <h2>E-books & Reports</h2>
                 <a href="#" className="view-all-btn">View All &rarr;</a>
@@ -377,6 +381,7 @@ const VideoTutorials = () => {
     return (
         <section className="video-tutorials">
             <div className="container">
+                <span className="section-label">LEARNING</span>
                 <h2>Video Tutorials</h2>
                 <div className="videos-grid">
                     {visibleVideos.map((video, idx) => (

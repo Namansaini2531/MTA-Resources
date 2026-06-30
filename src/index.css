@@ -68,6 +68,16 @@ h4 {
     margin-bottom: 0.5rem;
 }
 
+.section-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 8px;
+    display: block;
+}
+
 /* Header */
 .main-header {
     border-bottom: 1px solid var(--border-color);
