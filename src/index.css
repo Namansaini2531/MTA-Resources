@@ -217,15 +217,14 @@ h4 {
 /* General Tags */
 .tag {
     display: inline-block;
-    padding: 4px 10px;
-    background-color: #f0f0f0;
-    border-radius: 12px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--text-muted);
+    padding: 6px 12px;
+    background-color: #f3f4f6;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: #2563eb;
     margin-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+    transition: all 0.2s ease;
 }
 
 .date {
@@ -293,11 +292,12 @@ h4 {
 
 .featured-tag {
     background-color: #f3f4f6;
-    color: #4b5563;
+    color: #2563eb;
     padding: 6px 12px;
-    border-radius: 6px;
+    border-radius: 8px;
     font-size: 0.85rem;
     font-weight: 500;
+    transition: all 0.2s ease;
 }
 
 .featured-hero-content h3 {
