@@ -52,9 +52,12 @@ const PopularTopics = () => (
         <div className="container">
             <h2>Explore popular topics</h2>
             <div className="topic-chips">
-                <a href="#" className="chip">Upwork vs. Fiverr</a>
-                <a href="#" className="chip">Best freelance websites</a>
-                <a href="#" className="chip">Online jobs for students</a>
+                <a href="#" className="chip">Marketing Automation</a>
+                <a href="#" className="chip">CRM & Analytics</a>
+                <a href="#" className="chip">AI in Marketing Tech</a>
+                <a href="#" className="chip">SEO & Content Tech</a>
+                <a href="#" className="chip">Hiring MarTech Experts</a>
+                <a href="#" className="chip">MarTech Stack Audit</a>
             </div>
         </div>
     </section>
