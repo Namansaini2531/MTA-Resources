@@ -6,7 +6,7 @@
 }
 
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Outfit', sans-serif;
     color: #1a1a1a;
     line-height: 1.5;
     background-color: #ffffff;
@@ -33,7 +33,7 @@ ul {
 
 /* Colors */
 :root {
-    --primary-color: #f15b24;
+    --primary-color: #FF4E50;
     --secondary-color: #00a082;
     --dark-bg: #111111;
     --text-main: #1a1a1a;

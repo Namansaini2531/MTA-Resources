@@ -382,7 +382,7 @@ const VideoTutorials = () => {
         <section className="video-tutorials">
             <div className="container">
                 <span className="section-label">LEARNING</span>
-                <h2>Video Tutorials</h2>
+                <h2>Video Resources</h2>
                 <div className="videos-grid">
                     {visibleVideos.map((video, idx) => (
                         <a href="https://youtube.com" target="_blank" rel="noreferrer" className="video-card" key={idx}>
