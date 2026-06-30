@@ -133,7 +133,7 @@ const LatestBlogs = () => (
                             <h4>Product Manager Resume 2026: What Hiring Managers Actually Read</h4>
                         </div>
                     </a>
-                    <a href="#" className="compact-blog-card shadow-card">
+                    <a href="#" className="compact-blog-card">
                         <div className="compact-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=200')" }}></div>
                         <div className="compact-content">
                             <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
