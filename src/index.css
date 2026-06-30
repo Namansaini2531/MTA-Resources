@@ -599,57 +599,87 @@ h4 {
 
 /* 8. Newsletter Subscription */
 .newsletter-section {
-    padding: 80px 0;
+    background-color: var(--dark-bg);
+    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+    background-size: 24px 24px;
+    padding: 100px 0 80px 0;
+    border-radius: 48px 48px 0 0;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .newsletter-container {
-    background: var(--bg-light);
-    border: 1px solid var(--border-color);
-    border-radius: 24px;
-    padding: 60px 40px;
-    text-align: center;
     max-width: 800px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.newsletter-content h2 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 20px;
+    letter-spacing: -0.02em;
 }
 
 .newsletter-content p {
-    color: var(--text-muted);
-    margin-bottom: 30px;
-    font-size: 1.1rem;
+    color: #9ca3af;
+    margin-bottom: 40px;
+    font-size: 1.15rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .newsletter-form {
     display: flex;
-    max-width: 500px;
+    max-width: 550px;
     margin: 0 auto;
-    gap: 10px;
+    gap: 15px;
+    align-items: center;
 }
 
 .newsletter-form input {
     flex: 1;
-    padding: 15px 20px;
-    border: 1px solid var(--border-color);
+    padding: 16px 28px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
     border-radius: 30px;
     font-size: 1rem;
     outline: none;
+    background-color: white;
+    color: #111111;
+    transition: all 0.3s;
+}
+
+.newsletter-form input::placeholder {
+    color: #9ca3af;
 }
 
 .newsletter-form input:focus {
-    border-color: var(--primary-color);
+    border-color: #ff7043;
+    box-shadow: 0 0 0 2px rgba(255, 112, 67, 0.2);
 }
 
 .subscribe-btn {
-    background: var(--dark-bg);
+    background-color: #ff7043;
     color: white;
     border: none;
-    padding: 0 30px;
+    padding: 16px 36px;
     border-radius: 30px;
     font-weight: 600;
+    font-size: 1rem;
     cursor: pointer;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
+    white-space: nowrap;
 }
 
 .subscribe-btn:hover {
-    background: #333;
+    background-color: #e65f33;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(255, 112, 67, 0.3);
 }
 
 /* Footer (from screenshot) */
