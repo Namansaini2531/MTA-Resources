@@ -526,8 +526,8 @@ h4 {
 
 .videos-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 24px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
     margin-bottom: 40px;
 }
 
@@ -538,7 +538,7 @@ h4 {
 }
 
 .video-thumbnail {
-    height: 165px;
+    height: 200px;
     background-size: cover;
     background-position: center;
     border-radius: 12px;
