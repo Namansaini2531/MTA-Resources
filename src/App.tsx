@@ -45,53 +45,62 @@ const PopularTopics = () => (
 );
 
 const FeaturedResources = () => (
-    <section className="featured-resources bg-light">
+    <section className="featured-resources-section">
         <div className="container">
-            <h2>Featured Resources</h2>
-            <div className="featured-grid">
-                <a href="#" className="featured-card large-card">
-                    <div className="card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=800')" }}></div>
-                    <div className="card-content">
-                        <div className="tags">
-                            <span className="tag">Hiring</span> <span className="tag">Article</span>
+            <h2 className="featured-title">Featured Resources</h2>
+            
+            {/* Top row - large highlighted resource */}
+            <div className="featured-hero">
+                <div className="featured-hero-image-container">
+                    <div className="featured-hero-image" style={{ backgroundImage: "url('/tandem_bicycle.png')" }}></div>
+                </div>
+                <div className="featured-hero-content">
+                    <div className="featured-tags">
+                        <span className="featured-tag">Hiring & Management</span>
+                        <span className="featured-tag">Article</span>
+                    </div>
+                    <h3>How To Build a Successful Team in a Growing Small Business</h3>
+                    <p className="featured-date">Mar 30, 2026</p>
+                </div>
+            </div>
+
+            {/* Bottom row - 3 columns of card resources */}
+            <div className="featured-cards-grid">
+                <a href="#" className="resource-card">
+                    <div className="resource-card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?auto=format&fit=crop&q=80&w=600')" }}></div>
+                    <div className="resource-card-content">
+                        <div className="featured-tags">
+                            <span className="featured-tag">Work & Career</span>
+                            <span className="featured-tag">Article</span>
                         </div>
-                        <h3>How to Find Your Agency Match</h3>
-                        <p className="date">Mar 30, 2026</p>
+                        <h4>How To Onboard a New Client: A Step-by-Step Guide</h4>
+                        <p className="featured-date">Apr 3, 2026</p>
                     </div>
                 </a>
                 
-                <div className="small-cards">
-                    <a href="#" className="featured-card small-card">
-                        <div className="card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=400')" }}></div>
-                        <div className="card-content">
-                            <div className="tags">
-                                <span className="tag">Tech</span>
-                            </div>
-                            <h3>Connecting with Verified Experts</h3>
-                            <p className="date">Apr 9, 2026</p>
+                <a href="#" className="resource-card">
+                    <div className="resource-card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600')" }}></div>
+                    <div className="resource-card-content">
+                        <div className="featured-tags">
+                            <span className="featured-tag">AI Services</span>
+                            <span className="featured-tag">Article</span>
                         </div>
-                    </a>
-                    <a href="#" className="featured-card small-card">
-                        <div className="card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=400')" }}></div>
-                        <div className="card-content">
-                            <div className="tags">
-                                <span className="tag">Market</span>
-                            </div>
-                            <h3>Marketing Portfolio Guide</h3>
-                            <p className="date">Mar 6, 2026</p>
+                        <h4>5 Ways Organizations Can Engage and Advance Women in the Workplace</h4>
+                        <p className="featured-date">Mar 24, 2026</p>
+                    </div>
+                </a>
+
+                <a href="#" className="resource-card">
+                    <div className="resource-card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=600')" }}></div>
+                    <div className="resource-card-content">
+                        <div className="featured-tags">
+                            <span className="featured-tag">Work & Career</span>
+                            <span className="featured-tag">Article</span>
                         </div>
-                    </a>
-                    <a href="#" className="featured-card small-card">
-                        <div className="card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&q=80&w=400')" }}></div>
-                        <div className="card-content">
-                            <div className="tags">
-                                <span className="tag">AI</span>
-                            </div>
-                            <h3>How to Set up a Search</h3>
-                            <p className="date">Apr 3, 2026</p>
-                        </div>
-                    </a>
-                </div>
+                        <h4>Build Better Client Relationships: 10 Communication Strategies for Freelancers</h4>
+                        <p className="featured-date">Apr 9, 2026</p>
+                    </div>
+                </a>
             </div>
         </div>
     </section>

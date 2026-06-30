@@ -189,17 +189,94 @@ h4 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
 }
 
 /* 3. Featured Resources */
-.featured-resources {
+.featured-resources-section {
     padding: 80px 0;
+    background-color: white;
 }
 
-.featured-grid {
+.featured-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    margin-bottom: 40px;
+    color: #111827;
+}
+
+.featured-hero {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 40px;
+    align-items: center;
+    margin-bottom: 60px;
+}
+
+.featured-hero-image-container {
+    overflow: hidden;
+    border-radius: 24px;
+}
+
+.featured-hero-image {
+    height: 400px;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
+}
+
+.featured-hero:hover .featured-hero-image {
+    transform: scale(1.03);
+}
+
+.featured-hero-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+}
+
+.featured-tags {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.featured-tag {
+    background-color: #f3f4f6;
+    color: #4b5563;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 0.85rem;
+    font-weight: 500;
+}
+
+.featured-hero-content h3 {
+    font-size: 2.2rem;
+    line-height: 1.25;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 20px;
+}
+
+.featured-date {
+    font-size: 0.9rem;
+    color: #9ca3af;
+    margin: 0;
+}
+
+.featured-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     gap: 30px;
 }
 
-.card-image {
+.resource-card {
+    display: flex;
+    flex-direction: column;
+    text-decoration: none;
+    color: inherit;
+}
+
+.resource-card-image {
+    height: 250px;
     background-size: cover;
     background-position: center;
     border-radius: 20px;
@@ -207,41 +284,29 @@ h4 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
     transition: transform 0.5s ease;
 }
 
-.featured-card {
+.resource-card-image-container {
+    overflow: hidden;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
+
+.resource-card:hover .resource-card-image {
+    transform: scale(1.03);
+}
+
+.resource-card h4 {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    font-weight: 700;
+    color: #111827;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+.resource-card-content {
     display: flex;
     flex-direction: column;
-    background: var(--card-bg);
-    border-radius: 20px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-}
-
-.featured-card:hover .card-image {
-    transform: scale(1.05);
-}
-
-.large-card .card-image {
-    height: 400px;
-    margin-bottom: 0;
-    border-radius: 20px 20px 0 0;
-}
-
-.large-card .card-content {
-    padding: 30px;
-    border: 1px solid var(--border-color);
-    border-top: none;
-    border-radius: 0 0 20px 20px;
-}
-
-.small-cards {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-}
-
-.small-card .card-image {
-    height: 150px;
-    border-radius: 12px;
+    flex-grow: 1;
 }
 
 /* 4. Blogs */
@@ -717,7 +782,18 @@ h4 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {
-    .featured-grid, .blogs-grid {
+    .featured-hero {
+        grid-template-columns: 1fr;
+        gap: 30px;
+    }
+    .featured-hero-image {
+        height: 300px;
+    }
+    .featured-cards-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+    .blogs-grid {
         grid-template-columns: 1fr;
     }
     .reports-grid, .videos-grid {
@@ -742,7 +818,13 @@ h4 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
 @media (max-width: 768px) {
     h1 { font-size: 2.5rem; }
     h2 { font-size: 2rem; }
-    .reports-grid, .videos-grid, .small-cards {
+    .featured-hero-image {
+        height: 240px;
+    }
+    .featured-cards-grid {
+        grid-template-columns: 1fr;
+    }
+    .reports-grid, .videos-grid {
         grid-template-columns: 1fr;
     }
     .footer-top {
