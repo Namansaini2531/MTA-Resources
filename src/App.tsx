@@ -67,7 +67,9 @@ const FeaturedResources = () => (
             {/* Bottom row - 3 columns of card resources */}
             <div className="featured-cards-grid">
                 <a href="#" className="resource-card">
-                    <div className="resource-card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?auto=format&fit=crop&q=80&w=600')" }}></div>
+                    <div className="resource-card-image-container">
+                        <div className="resource-card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?auto=format&fit=crop&q=80&w=600')" }}></div>
+                    </div>
                     <div className="resource-card-content">
                         <div className="featured-tags">
                             <span className="featured-tag">Work & Career</span>
@@ -79,7 +81,9 @@ const FeaturedResources = () => (
                 </a>
                 
                 <a href="#" className="resource-card">
-                    <div className="resource-card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600')" }}></div>
+                    <div className="resource-card-image-container">
+                        <div className="resource-card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600')" }}></div>
+                    </div>
                     <div className="resource-card-content">
                         <div className="featured-tags">
                             <span className="featured-tag">AI Services</span>
@@ -91,7 +95,9 @@ const FeaturedResources = () => (
                 </a>
 
                 <a href="#" className="resource-card">
-                    <div className="resource-card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=600')" }}></div>
+                    <div className="resource-card-image-container">
+                        <div className="resource-card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=600')" }}></div>
+                    </div>
                     <div className="resource-card-content">
                         <div className="featured-tags">
                             <span className="featured-tag">Work & Career</span>

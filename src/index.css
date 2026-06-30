@@ -212,11 +212,17 @@ h4 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
 .featured-hero-image-container {
     overflow: hidden;
     border-radius: 24px;
+    background-color: #1554c5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .featured-hero-image {
+    width: 100%;
     height: 400px;
-    background-size: cover;
+    background-size: contain;
+    background-repeat: no-repeat;
     background-position: center;
     transition: transform 0.5s ease;
 }
@@ -235,7 +241,7 @@ h4 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
 .featured-tags {
     display: flex;
     gap: 8px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     flex-wrap: wrap;
 }
 
@@ -259,7 +265,7 @@ h4 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
 .featured-date {
     font-size: 0.9rem;
     color: #9ca3af;
-    margin: 0;
+    margin-top: auto;
 }
 
 .featured-cards-grid {
@@ -271,36 +277,37 @@ h4 { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.5rem; }
 .resource-card {
     display: flex;
     flex-direction: column;
+    height: 100%;
     text-decoration: none;
     color: inherit;
-}
-
-.resource-card-image {
-    height: 250px;
-    background-size: cover;
-    background-position: center;
-    border-radius: 20px;
-    margin-bottom: 20px;
-    transition: transform 0.5s ease;
 }
 
 .resource-card-image-container {
     overflow: hidden;
     border-radius: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
+    height: 200px;
+}
+
+.resource-card-image {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.5s ease;
 }
 
 .resource-card:hover .resource-card-image {
-    transform: scale(1.03);
+    transform: scale(1.04);
 }
 
 .resource-card h4 {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
     line-height: 1.4;
-    font-weight: 700;
+    font-weight: 600;
     color: #111827;
     margin-top: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .resource-card-content {
