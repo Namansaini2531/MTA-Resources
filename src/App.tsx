@@ -289,11 +289,11 @@ const Newsletter = () => (
     <section className="newsletter-section">
         <div className="container newsletter-container">
             <div className="newsletter-content">
-                <h2>Subscribe to our newsletter</h2>
-                <p>Get weekly updates on industry news, marketing insights, hiring resources, and salary updates.</p>
+                <h2>Stay ahead of the curve.</h2>
+                <p>Join 15,000+ MarTech leaders receiving our weekly strategic briefing on the future of marketing technology.</p>
                 <form className="newsletter-form" onSubmit={(e) => e.preventDefault()}>
-                    <input type="email" placeholder="Enter your email address" required />
-                    <button type="submit" className="subscribe-btn">Subscribe</button>
+                    <input type="email" placeholder="work@company.com" required />
+                    <button type="submit" className="subscribe-btn">Subscribe Now</button>
                 </form>
             </div>
         </div>
