@@ -54,8 +54,6 @@ const PopularTopics = () => (
             <div className="topic-chips">
                 <a href="#" className="chip">Marketing Automation</a>
                 <a href="#" className="chip">CRM & Analytics</a>
-                <a href="#" className="chip">AI in Marketing Tech</a>
-                <a href="#" className="chip">SEO & Content Tech</a>
                 <a href="#" className="chip">Hiring MarTech Experts</a>
                 <a href="#" className="chip">MarTech Stack Audit</a>
             </div>
