@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from 'react';
 import './index.css';
 import { resourcesData } from './data/resources';
+import type { ResourceItem, ArticleComment, ContentBlock } from './data/resources';
 
 interface ScrollRevealProps {
     children: React.ReactNode;
@@ -67,13 +68,17 @@ const ScrollReveal = ({
     );
 };
 
-const Header = () => {
+interface HeaderProps {
+    onHome: () => void;
+}
+
+const Header = ({ onHome }: HeaderProps) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
         <header className="main-header">
             <div className="container header-container">
-                <div className="logo-container">
+                <div className="logo-container" onClick={onHome} style={{ cursor: 'pointer' }}>
                     <svg width="38" height="28" viewBox="0 0 84 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="header-logo-icon">
                         {/* Teal / Mint Ring */}
                         <circle cx="26" cy="38" r="12" stroke="#00a082" strokeWidth="3.5" fill="none" />
@@ -90,10 +95,10 @@ const Header = () => {
                     <span className="logo-text">MarTechAdda</span>
                 </div>
                 <nav className={`nav-links ${isMenuOpen ? 'mobile-open' : ''}`}>
-                    <a href="#" onClick={() => setIsMenuOpen(false)}>Marketing Services</a>
-                    <a href="#" onClick={() => setIsMenuOpen(false)}>How It Works</a>
-                    <a href="#" onClick={() => setIsMenuOpen(false)}>Resources</a>
-                    <a href="#" onClick={() => setIsMenuOpen(false)}>For Experts</a>
+                    <a href="#" onClick={() => { setIsMenuOpen(false); onHome(); }}>Marketing Services</a>
+                    <a href="#" onClick={() => { setIsMenuOpen(false); onHome(); }}>How It Works</a>
+                    <a href="#" onClick={() => { setIsMenuOpen(false); onHome(); }}>Resources</a>
+                    <a href="#" onClick={() => { setIsMenuOpen(false); onHome(); }}>For Experts</a>
                     <a href="#" className="login-link mobile-only-login" onClick={() => setIsMenuOpen(false)}>Login</a>
                 </nav>
                 <div className="header-actions">
@@ -141,7 +146,11 @@ const PopularTopics = () => (
     </section>
 );
 
-const FeaturedResources = () => (
+interface FeaturedResourcesProps {
+    onSelectArticle: (id: string) => void;
+}
+
+const FeaturedResources = ({ onSelectArticle }: FeaturedResourcesProps) => (
     <section className="featured-resources-section">
         <div className="container">
             <ScrollReveal animation="slide-up">
@@ -151,7 +160,11 @@ const FeaturedResources = () => (
 
             {/* Top row - large highlighted resource */}
             <ScrollReveal animation="slide-up" delay={100}>
-                <div className="featured-hero">
+                <div 
+                    className="featured-hero"
+                    onClick={() => onSelectArticle('a5')}
+                    style={{ cursor: 'pointer' }}
+                >
                     <div className="featured-hero-image-container">
                         <div className="featured-hero-image" style={{ backgroundImage: "url('/tandem_bicycle.png')" }}></div>
                     </div>
@@ -169,7 +182,11 @@ const FeaturedResources = () => (
             {/* Bottom row - 3 columns of card resources */}
             <div className="featured-cards-grid">
                 <ScrollReveal animation="slide-up" delay={100} className="resource-card-reveal">
-                    <a href="#" className="resource-card">
+                    <div 
+                        onClick={() => onSelectArticle('a2')}
+                        className="resource-card"
+                        style={{ cursor: 'pointer' }}
+                    >
                         <div className="resource-card-image-container">
                             <div className="resource-card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?auto=format&fit=crop&q=80&w=600')" }}></div>
                         </div>
@@ -181,11 +198,15 @@ const FeaturedResources = () => (
                             <h4>How To Onboard a New Client: A Step-by-Step Guide</h4>
                             <p className="featured-date">Apr 3, 2026</p>
                         </div>
-                    </a>
+                    </div>
                 </ScrollReveal>
 
                 <ScrollReveal animation="slide-up" delay={200} className="resource-card-reveal">
-                    <a href="#" className="resource-card">
+                    <div 
+                        onClick={() => onSelectArticle('a3')}
+                        className="resource-card"
+                        style={{ cursor: 'pointer' }}
+                    >
                         <div className="resource-card-image-container">
                             <div className="resource-card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600')" }}></div>
                         </div>
@@ -197,11 +218,15 @@ const FeaturedResources = () => (
                             <h4>5 Ways Organizations Can Engage and Advance Women in the Workplace</h4>
                             <p className="featured-date">Mar 24, 2026</p>
                         </div>
-                    </a>
+                    </div>
                 </ScrollReveal>
 
                 <ScrollReveal animation="slide-up" delay={300} className="resource-card-reveal">
-                    <a href="#" className="resource-card">
+                    <div 
+                        onClick={() => onSelectArticle('a4')}
+                        className="resource-card"
+                        style={{ cursor: 'pointer' }}
+                    >
                         <div className="resource-card-image-container">
                             <div className="resource-card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=600')" }}></div>
                         </div>
@@ -213,7 +238,7 @@ const FeaturedResources = () => (
                             <h4>Build Better Client Relationships: 10 Communication Strategies for Freelancers</h4>
                             <p className="featured-date">Apr 9, 2026</p>
                         </div>
-                    </a>
+                    </div>
                 </ScrollReveal>
             </div>
         </div>
@@ -307,7 +332,11 @@ const LatestBlogs = () => (
     </section>
 );
 
-const AllResourcesSection = () => {
+interface AllResourcesSectionProps {
+    onSelectArticle: (id: string) => void;
+}
+
+const AllResourcesSection = ({ onSelectArticle }: AllResourcesSectionProps) => {
     const [activeCategory, setActiveCategory] = useState<string>('All');
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [bookmarkedIds, setBookmarkedIds] = useState<Set<string>>(new Set());
@@ -422,7 +451,11 @@ const AllResourcesSection = () => {
                                     delay={(idx % 3) * 80}
                                     className="resource-card-reveal"
                                 >
-                                    <div className="resource-item-card">
+                                    <div 
+                                        className="resource-item-card" 
+                                        onClick={() => onSelectArticle(resource.id)}
+                                        style={{ cursor: 'pointer' }}
+                                    >
                                         <div className="resource-image-container">
                                             <div
                                                 className="resource-card-image"
@@ -431,7 +464,7 @@ const AllResourcesSection = () => {
                                             <span className="resource-overlay-badge">{resource.category}</span>
                                             <button
                                                 className={`resource-bookmark-btn ${isBookmarked ? 'active' : ''}`}
-                                                onClick={() => toggleBookmark(resource.id)}
+                                                onClick={(e) => { e.stopPropagation(); toggleBookmark(resource.id); }}
                                                 aria-label={isBookmarked ? "Remove bookmark" : "Bookmark resource"}
                                             >
                                                 <svg
@@ -760,18 +793,363 @@ const Footer = () => (
     </footer>
 );
 
-function App() {
+interface ArticleDetailViewProps {
+    articleId: string;
+    onBack: () => void;
+    onSelectArticle: (id: string) => void;
+}
+
+const ArticleDetailView = ({ articleId, onBack, onSelectArticle }: ArticleDetailViewProps) => {
+    const resource = resourcesData.find(item => item.id === articleId);
+    
+    if (!resource) {
+        return (
+            <section className="article-detail-section">
+                <div className="container" style={{ textAlign: 'center', padding: '100px 20px' }}>
+                    <h2>Article not found</h2>
+                    <button className="load-more-btn" onClick={onBack}>Back to Resources</button>
+                </div>
+            </section>
+        );
+    }
+
+    const [commentsList, setCommentsList] = useState<ArticleComment[]>(resource.comments || []);
+    const [newCommentText, setNewCommentText] = useState<string>('');
+    const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
+
+    useEffect(() => {
+        setCommentsList(resource.comments || []);
+        setNewCommentText('');
+        setIsBookmarked(false);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, [resource]);
+
+    const handlePostComment = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (!newCommentText.trim()) return;
+
+        const newComment: ArticleComment = {
+            authorName: 'Guest User',
+            avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100',
+            date: 'Just now',
+            content: newCommentText.trim()
+        };
+
+        setCommentsList(prev => [newComment, ...prev]);
+        setNewCommentText('');
+    };
+
+    const getArticleBlocks = (res: ResourceItem): ContentBlock[] => {
+        if (res.articleContent && res.articleContent.length > 0) {
+            return res.articleContent;
+        }
+        
+        return [
+            {
+                type: 'paragraph',
+                text: `${res.description} This detailed guide explores essential concepts, workflows, and tools designed to optimize this topic for B2B brands and agencies alike.`
+            },
+            {
+                type: 'paragraph',
+                text: 'When implementing this solution, the first step is analyzing your current organizational maturity and defining a set of core milestones. Too often, organizations run headfirst into implementation without setting benchmarks.'
+            },
+            {
+                type: 'heading',
+                text: 'Key Core Abstractions'
+            },
+            {
+                type: 'paragraph',
+                text: 'To get started effectively, focus on structural alignment across your teams. This ensures that everyone is moving in the same direction and metrics are tracked under a single source of truth.'
+            },
+            {
+                type: 'blockquote',
+                text: 'Execution quality is direct proof of operational maturity. Keep your configurations clean and consistent.'
+            },
+            {
+                type: 'list',
+                items: [
+                    'Milestone 1: Define clear requirements and track metrics from day one.',
+                    'Milestone 2: Eliminate duplicate workflows and consolidate overlapping platforms.',
+                    'Milestone 3: Invest in robust team training and standard operating procedures.'
+                ]
+            },
+            {
+                type: 'paragraph',
+                text: 'Following these guidelines will help secure a durable and scalable growth process, driving actual value straight to your bottom line.'
+            }
+        ];
+    };
+
+    const author = resource.author || {
+        name: 'Sarah Jenkins',
+        avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150',
+        role: 'Lead MarTech Architect',
+        bio: 'Sarah is a Lead Architect specializing in database schemas, automated marketing flows, and software integrations.'
+    };
+
+    const publishDate = resource.publishDate || 'May 14, 2026';
+    const tags = resource.tags || [resource.tag, 'Marketing Technology', 'SaaS', 'Automation'];
+    const articleBlocks = getArticleBlocks(resource);
+
+    // Pick 3 related articles (excluding current article and Videos)
+    const relatedArticles = resourcesData
+        .filter(item => item.id !== resource.id && item.category !== 'Videos')
+        .slice(0, 3);
+
     return (
         <>
-            <Header />
+            <section className="article-detail-section">
+                <div className="container">
+                    <ScrollReveal animation="fade-in">
+                        <div className="article-back-link" onClick={onBack}>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <line x1="19" y1="12" x2="5" y2="12"></line>
+                                <polyline points="12,19 5,12 12,5"></polyline>
+                            </svg>
+                            Back to Resources
+                        </div>
+                    </ScrollReveal>
+
+                    <ScrollReveal animation="slide-up">
+                        <span className="article-category-badge">{resource.category} / {resource.tag}</span>
+                        <h1 className="article-detail-title">{resource.title}</h1>
+                    </ScrollReveal>
+
+                    <ScrollReveal animation="slide-up" delay={50}>
+                        <div className="article-author-bar">
+                            <div className="article-author-info">
+                                <div className="article-author-avatar" style={{ backgroundImage: `url('${author.avatar}')` }} />
+                                <div className="article-author-meta">
+                                    <span className="article-author-name">{author.name}</span>
+                                    <span className="article-publish-date">{publishDate} • {resource.readTime}</span>
+                                </div>
+                            </div>
+                            <div className="article-actions">
+                                <button 
+                                    className={`article-action-btn ${isBookmarked ? 'active' : ''}`}
+                                    onClick={() => setIsBookmarked(!isBookmarked)}
+                                    aria-label="Bookmark article"
+                                >
+                                    <svg 
+                                        width="18" 
+                                        height="18" 
+                                        viewBox="0 0 24 24" 
+                                        fill={isBookmarked ? "currentColor" : "none"} 
+                                        stroke="currentColor" 
+                                        strokeWidth="2"
+                                        strokeLinecap="round" 
+                                        strokeLinejoin="round"
+                                    >
+                                        <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                                    </svg>
+                                </button>
+                                <button className="article-action-btn" aria-label="Share article">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <circle cx="18" cy="5" r="3"></circle>
+                                        <circle cx="6" cy="12" r="3"></circle>
+                                        <circle cx="18" cy="19" r="3"></circle>
+                                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
+                                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </ScrollReveal>
+
+                    <ScrollReveal animation="slide-up" delay={100}>
+                        <div className="article-hero-image" style={{ backgroundImage: `url('${resource.imageUrl}')` }} />
+                    </ScrollReveal>
+
+                    <div className="article-body-container">
+                        {articleBlocks.map((block: ContentBlock, index: number) => {
+                            if (block.type === 'paragraph') {
+                                return <p key={index} className={index === 0 ? "article-lead" : ""}>{block.text}</p>;
+                            } else if (block.type === 'heading') {
+                                return <h3 key={index}>{block.text}</h3>;
+                            } else if (block.type === 'blockquote') {
+                                return <blockquote key={index}>{block.text}</blockquote>;
+                            } else if (block.type === 'list') {
+                                return (
+                                    <ul key={index}>
+                                        {block.items?.map((item: string, iIdx: number) => (
+                                            <li key={iIdx}>{item}</li>
+                                        ))}
+                                    </ul>
+                                );
+                            }
+                            return null;
+                        })}
+
+                        <div className="article-tags">
+                            {tags.map((t, idx) => (
+                                <span key={idx} className="article-tag-pill">#{t.replace(/\s+/g, '')}</span>
+                            ))}
+                        </div>
+
+                        <div className="author-bio-card">
+                            <div className="bio-avatar" style={{ backgroundImage: `url('${author.avatar}')` }} />
+                            <div className="bio-content">
+                                <span className="bio-name">{author.name}</span>
+                                <p className="bio-text">{author.bio}</p>
+                                <span className="bio-view-profile">
+                                    View profile 
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12,5 19,12 12,19"></polyline>
+                                    </svg>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div className="responses-section">
+                            <h3>Responses ({commentsList.length})</h3>
+                            <form className="comment-box-container" onSubmit={handlePostComment}>
+                                <textarea 
+                                    className="comment-textarea"
+                                    placeholder="What are your thoughts?"
+                                    value={newCommentText}
+                                    onChange={(e) => setNewCommentText(e.target.value)}
+                                    required
+                                />
+                                <div className="comment-submit-row">
+                                    <button type="submit" className="comment-submit-btn">Post Response</button>
+                                </div>
+                            </form>
+
+                            <div className="comments-list">
+                                {commentsList.map((comment: ArticleComment, index: number) => (
+                                    <div key={index} className="comment-card">
+                                        <div className="comment-header">
+                                            <div className="comment-user">
+                                                <div className="comment-avatar" style={{ backgroundImage: `url('${comment.avatar}')` }} />
+                                                <div className="comment-user-info">
+                                                    <span className="comment-user-name">
+                                                        {comment.authorName}
+                                                        {comment.role === 'Author' && (
+                                                            <span className="comment-author-badge">Author</span>
+                                                        )}
+                                                    </span>
+                                                    <span className="comment-date">{comment.date}</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <p className="comment-body">{comment.content}</p>
+                                        <div className="comment-actions">
+                                            <span className="comment-action-link">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path d="M14 9V5a3 3 0 0 0-3-3l-4 9v11h11.28a2 2 0 0 0 2-1.7l1.38-9a2 2 0 0 0-2-2.3zM7 22H4a2 2 0 0 1-2-2v-7a2 2 0 0 1 2-2h3"></path>
+                                                </svg>
+                                                Like
+                                            </span>
+                                            <span className="comment-action-link">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                                                </svg>
+                                                Reply
+                                            </span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="article-newsletter-banner">
+                            <h3>Enjoyed this article?</h3>
+                            <p>Get the latest MarTech insights, tutorials, and benchmarks delivered straight to your inbox weekly.</p>
+                            <form className="article-newsletter-form" onSubmit={(e) => e.preventDefault()}>
+                                <input 
+                                    type="email" 
+                                    className="article-newsletter-input" 
+                                    placeholder="Your email address" 
+                                    required 
+                                />
+                                <button type="submit" className="article-newsletter-btn">Subscribe</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section className="related-articles-section">
+                <div className="container">
+                    <div className="related-header">
+                        <h2>Related Articles</h2>
+                        <div className="related-read-more" onClick={onBack} style={{ cursor: 'pointer' }}>
+                            Read More
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                                <polyline points="12,5 19,12 12,19"></polyline>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <div className="resources-grid">
+                        {relatedArticles.map((art, idx) => (
+                            <ScrollReveal 
+                                key={art.id} 
+                                animation="slide-up" 
+                                delay={idx * 100}
+                                className="resource-card-reveal"
+                            >
+                                <div 
+                                    className="resource-item-card"
+                                    onClick={() => onSelectArticle(art.id)}
+                                    style={{ cursor: 'pointer' }}
+                                >
+                                    <div className="resource-image-container">
+                                        <div 
+                                            className="resource-card-image" 
+                                            style={{ backgroundImage: `url('${art.imageUrl}')` }} 
+                                        />
+                                        <span className="resource-overlay-badge">{art.category}</span>
+                                    </div>
+                                    <div className="resource-content">
+                                        <span className="resource-meta-label">{art.subMeta}</span>
+                                        <h3 className="resource-item-title">{art.title}</h3>
+                                        <p className="resource-item-desc">{art.description}</p>
+                                    </div>
+                                </div>
+                            </ScrollReveal>
+                        ))}
+                    </div>
+                </div>
+            </section>
+        </>
+    );
+};
+
+function App() {
+    const [activeArticleId, setActiveArticleId] = useState<string | null>(null);
+
+    const handleSelectArticle = (id: string) => {
+        setActiveArticleId(id);
+    };
+
+    const handleGoHome = () => {
+        setActiveArticleId(null);
+    };
+
+    return (
+        <>
+            <Header onHome={handleGoHome} />
             <main>
-                <HeroSection />
-                <PopularTopics />
-                <FeaturedResources />
-                <AllResourcesSection />
-                <FeaturedProfiles />
-                <LatestBlogs />
-                <Newsletter />
+                {activeArticleId ? (
+                    <ArticleDetailView 
+                        articleId={activeArticleId} 
+                        onBack={handleGoHome} 
+                        onSelectArticle={handleSelectArticle}
+                    />
+                ) : (
+                    <>
+                        <HeroSection />
+                        <PopularTopics />
+                        <FeaturedResources onSelectArticle={handleSelectArticle} />
+                        <AllResourcesSection onSelectArticle={handleSelectArticle} />
+                        <FeaturedProfiles />
+                        <LatestBlogs />
+                        <Newsletter />
+                    </>
+                )}
             </main>
             <Footer />
         </>

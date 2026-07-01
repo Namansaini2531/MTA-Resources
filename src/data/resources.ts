@@ -1,3 +1,24 @@
+export interface ArticleComment {
+  authorName: string;
+  avatar: string;
+  date: string;
+  content: string;
+  role?: string;
+}
+
+export interface Author {
+  name: string;
+  avatar: string;
+  role: string;
+  bio: string;
+}
+
+export interface ContentBlock {
+  type: 'paragraph' | 'heading' | 'blockquote' | 'list';
+  text?: string;
+  items?: string[];
+}
+
 export interface ResourceItem {
   id: string;
   category: 'Guides' | 'Articles' | 'Case Studies' | 'E-books' | 'Videos' | 'Checklists';
@@ -7,6 +28,11 @@ export interface ResourceItem {
   imageUrl: string;
   readTime: string;
   tag: string;
+  author?: Author;
+  publishDate?: string;
+  articleContent?: ContentBlock[];
+  tags?: string[];
+  comments?: ArticleComment[];
 }
 
 const rawResources: ResourceItem[] = [
@@ -19,7 +45,78 @@ const rawResources: ResourceItem[] = [
     description: 'Learn how to build a unified design system, establish a unique brand voice, and stand out in a crowded marketplace.',
     imageUrl: 'https://images.unsplash.com/photo-1434626881859-194d67b2b86f?auto=format&fit=crop&q=80&w=600',
     readTime: '8 min read',
-    tag: 'Branding'
+    tag: 'Branding',
+    author: {
+      name: 'Giles Sterling',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150',
+      role: 'Principal Brand Strategist',
+      bio: 'Giles is a brand architect with over 15 years of experience helping SaaS and enterprise software brands design identity systems that command authority.'
+    },
+    publishDate: 'February 26, 2026',
+    tags: ['B2B Branding', 'Brand Strategy', 'Visual Design', 'Design Systems'],
+    articleContent: [
+      {
+        type: 'paragraph',
+        text: 'Why brand psychology is the most important foundation for building sustainable marketing attribution. While tools like CDPs and Attribution Modeling platforms measure the conversions, the software is only as good as the customer\'s understanding of your brand.'
+      },
+      {
+        type: 'paragraph',
+        text: 'In the B2B sector, purchase decisions are rarely impulsive. They are the result of weeks or months of research, stakeholder alignment, and risk assessment. In this environment, a weak brand identity represents a direct conversion blocker.'
+      },
+      {
+        type: 'heading',
+        text: 'The Credibility Factor'
+      },
+      {
+        type: 'paragraph',
+        text: 'The modern customer is highly skeptical. They want to work with market leaders, or brands that feel like leaders. This is where your visual identity system, brand voice consistency, and messaging hierarchy play a silent but pivotal role.'
+      },
+      {
+        type: 'blockquote',
+        text: 'There is zero point in buying tools when we make the technology look more complex and when the actual core value proposition remains unclear.'
+      },
+      {
+        type: 'heading',
+        text: 'Building Visual Consistency'
+      },
+      {
+        type: 'paragraph',
+        text: 'A unified B2B brand requires a strict design code that covers all marketing touchpoints. To achieve this, focus on:'
+      },
+      {
+        type: 'list',
+        items: [
+          'Typography Hierarchy: Establish clear rules for headings, lead text, and body copy.',
+          'Color Harmony: Limit your primary palette to 2-3 colors that express your brand\'s personality.',
+          'Design Tokens: Reuse margins, paddings, and border radius properties consistently across your site.'
+        ]
+      },
+      {
+        type: 'paragraph',
+        text: 'By standardizing these visual structures, you create a brand experience that builds trust and guides users smoothly toward conversion.'
+      }
+    ],
+    comments: [
+      {
+        authorName: 'Michael Chan',
+        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=100',
+        date: '2 days ago',
+        content: 'Great point about the credibility factor. In B2B SaaS, buyers are putting their professional reputation on the line when they choose a software vendor. A polished brand reduces that perceived risk.'
+      },
+      {
+        authorName: 'Giles Sterling',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100',
+        date: '1 day ago',
+        content: 'Exactly, Michael! Trust is the ultimate conversion metric in enterprise software sales.',
+        role: 'Author'
+      },
+      {
+        authorName: 'Amanda Crites',
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100',
+        date: '12 hours ago',
+        content: 'Thanks for this guide. We\'re currently refactoring our UI design tokens, and the tips on color harmony are extremely timely.'
+      }
+    ]
   },
   {
     id: 'g2',
@@ -141,7 +238,68 @@ const rawResources: ResourceItem[] = [
     description: 'Unlock copywriting methods designed to keep readers engaged, increase email click rates, and convert landing page traffic.',
     imageUrl: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=600',
     readTime: '5 min read',
-    tag: 'Content Strategy'
+    tag: 'Content Strategy',
+    author: {
+      name: 'Aisha Rahman',
+      avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150',
+      role: 'SEO & Content Tech Lead',
+      bio: 'Aisha helps SaaS teams design content loops and programmatic SEO setups to capture high-intent search volumes.'
+    },
+    publishDate: 'March 12, 2026',
+    tags: ['Copywriting', 'Content Strategy', 'Conversion Optimization', 'Writing Tips'],
+    articleContent: [
+      {
+        type: 'paragraph',
+        text: 'Copywriting isn\'t just about stringing beautiful words together. It\'s about designing a clear, logical flow of information that drives action.'
+      },
+      {
+        type: 'paragraph',
+        text: 'Too often, copywriters write to impress rather than to convert. The result is bloated text, confusing value propositions, and poor sign-up rates. To build a content system that actually drives revenue, you need a blueprint.'
+      },
+      {
+        type: 'heading',
+        text: 'Understanding User Intent'
+      },
+      {
+        type: 'paragraph',
+        text: 'Before writing a single word, you must understand exactly where the reader stands. Are they just exploring, or are they comparing features to make a purchase decision?'
+      },
+      {
+        type: 'blockquote',
+        text: 'If your value proposition isn\'t clear in the first three seconds, the user will hit the back button. Period.'
+      },
+      {
+        type: 'heading',
+        text: 'Three Pillars of High-Converting Copy'
+      },
+      {
+        type: 'list',
+        items: [
+          'Clarity Over Cleverness: Avoid industry jargon and define your solution simply.',
+          'Focus on Benefits: Explain how your software solves the user\'s specific pain point.',
+          'Call to Action (CTA): Guide users to the next step with a single, clear button.'
+        ]
+      },
+      {
+        type: 'paragraph',
+        text: 'By aligning your content strategy along these pillars, you ensure that every article, page, and email template drives actual business value.'
+      }
+    ],
+    comments: [
+      {
+        authorName: 'Elena Rostova',
+        avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=100',
+        date: '3 days ago',
+        content: 'Spot on! The CTA clarity is something many sites get wrong by offering too many choices.'
+      },
+      {
+        authorName: 'Aisha Rahman',
+        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100',
+        date: '2 days ago',
+        content: 'Exactly, Elena. Cognitive load kills conversions. One primary action is always best.',
+        role: 'Author'
+      }
+    ]
   },
   {
     id: 'a2',
@@ -263,7 +421,68 @@ const rawResources: ResourceItem[] = [
     description: 'An in-depth case study on how leading SaaS companies optimized customer acquisition costs and scaled revenue.',
     imageUrl: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=600',
     readTime: '12 min read',
-    tag: 'Strategic Marketing'
+    tag: 'Strategic Marketing',
+    author: {
+      name: 'Arjun Mehta',
+      avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150',
+      role: 'Marketing Automation Director',
+      bio: 'Arjun specializes in building enterprise lead nurture programs, data pipelines, and marketing automation systems.'
+    },
+    publishDate: 'April 2, 2026',
+    tags: ['Strategic Marketing', 'Marketing Automation', 'Data Tracking', 'SaaS Growth'],
+    articleContent: [
+      {
+        type: 'paragraph',
+        text: 'Scaling a SaaS company in 2026 requires more than just paid ads. It demands a holistic, data-driven approach to customer acquisition and lifecycle retention.'
+      },
+      {
+        type: 'paragraph',
+        text: 'In this case study, we examine how top SaaS brands redesigned their marketing operations to survive post-cookie tracking shifts, reduce customer acquisition cost (CAC), and boost lifetime value.'
+      },
+      {
+        type: 'heading',
+        text: 'The Cookie Shift Challenge'
+      },
+      {
+        type: 'paragraph',
+        text: 'With standard web cookies deprecating, advertisers are flying blind. Retargeting campaigns are less efficient, and attribution metrics are muddy.'
+      },
+      {
+        type: 'blockquote',
+        text: 'First-party data collection is no longer a luxury. It is the core competitive advantage in modern B2B advertising.'
+      },
+      {
+        type: 'heading',
+        text: 'Key Growth Strategies Implemented'
+      },
+      {
+        type: 'list',
+        items: [
+          'Server-Side Tracking: Integrating client events directly from servers to prevent tracking blockages.',
+          'Interactive Quizzes: Collecting user preferences directly (zero-party data) to segment campaigns.',
+          'Attribution Modeling: Moving from single-touch to multi-touch modeling for budget decisions.'
+        ]
+      },
+      {
+        type: 'paragraph',
+        text: 'By shifting their focus to first-party databases and server-side tracking pipelines, SaaS leaders halved their CAC and secured a sustainable growth loop.'
+      }
+    ],
+    comments: [
+      {
+        authorName: 'Carlos Silva',
+        avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=100',
+        date: '5 days ago',
+        content: 'Implementing server-side GTM was a game-changer for our attribution accuracy. Great summary of the landscape.'
+      },
+      {
+        authorName: 'Arjun Mehta',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100',
+        date: '4 days ago',
+        content: 'Thanks, Carlos! Yes, server-side tagging is essential now. Clients who set it up early saw minimal disruption.',
+        role: 'Author'
+      }
+    ]
   },
   {
     id: 'c2',
