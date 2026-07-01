@@ -390,6 +390,161 @@ const ReportsSection = () => (
     </section>
 );
 
+const FeaturedProfiles = () => {
+    const profiles = [
+        {
+            name: "Sarah Jenkins",
+            role: "Lead MarTech Architect",
+            company: "HubSpot",
+            avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&q=80&w=150",
+            skills: ["HubSpot", "Lead Scoring", "RevOps"],
+            color: "#f15b24"
+        },
+        {
+            name: "Arjun Mehta",
+            role: "Marketing Automation Director",
+            company: "Adobe",
+            avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=150",
+            skills: ["Marketo", "Campaign Tech", "Deliverability"],
+            color: "#00a082"
+        },
+        {
+            name: "Elena Rostova",
+            role: "CRM Architect",
+            company: "Salesforce",
+            avatar: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&q=80&w=150",
+            skills: ["Salesforce", "Customer Journeys", "Analytics"],
+            color: "#18181b"
+        },
+        {
+            name: "David Chen",
+            role: "Head of Analytics",
+            company: "Google",
+            avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=150",
+            skills: ["GA4", "Tag Manager", "Conversion Tech"],
+            color: "#f15b24"
+        },
+        {
+            name: "Aisha Rahman",
+            role: "SEO & Content Tech Lead",
+            company: "Semrush",
+            avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150",
+            skills: ["SEO Tech", "Content Automation", "A/B Testing"],
+            color: "#00a082"
+        },
+        {
+            name: "Carlos Silva",
+            role: "Email Marketing Lead",
+            company: "Mailchimp",
+            avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=150",
+            skills: ["Campaigns", "Personalisation", "Data Tech"],
+            color: "#18181b"
+        },
+        {
+            name: "Priya Sharma",
+            role: "Growth Marketing Manager",
+            company: "Shopify",
+            avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=150",
+            skills: ["Ecommerce", "Growth Stacks", "Data Flows"],
+            color: "#f15b24"
+        }
+    ];
+
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [isPaused, setIsPaused] = useState(false);
+
+    useEffect(() => {
+        const handleResize = () => setWindowWidth(window.innerWidth);
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    const getVisibleCount = () => {
+        if (windowWidth <= 768) return 1;
+        if (windowWidth <= 1024) return 2;
+        return 3;
+    };
+
+    const visibleCount = getVisibleCount();
+    const maxIndex = profiles.length - visibleCount;
+
+    useEffect(() => {
+        if (isPaused) return;
+
+        const interval = setInterval(() => {
+            setCurrentIndex((prev) => {
+                return prev >= maxIndex ? 0 : prev + 1;
+            });
+        }, 3000);
+
+        return () => clearInterval(interval);
+    }, [isPaused, maxIndex]);
+
+    const prevSlide = () => {
+        setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
+    };
+
+    const nextSlide = () => {
+        setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
+    };
+
+    return (
+        <section className="profiles-section bg-light">
+            <div className="container">
+                <ScrollReveal animation="slide-up">
+                    <span className="section-label">EXPERTS</span>
+                    <div className="section-header">
+                        <h2>Featured Profiles</h2>
+                        <div className="carousel-nav-arrows">
+                            <button className="nav-arrow-btn" onClick={prevSlide}>&larr;</button>
+                            <button className="nav-arrow-btn" onClick={nextSlide}>&rarr;</button>
+                        </div>
+                    </div>
+                </ScrollReveal>
+
+                <ScrollReveal animation="slide-up" delay={100}>
+                    <div 
+                        className="profiles-carousel-viewport"
+                        onMouseEnter={() => setIsPaused(true)}
+                        onMouseLeave={() => setIsPaused(false)}
+                    >
+                        <div 
+                            className="profiles-carousel-track"
+                            style={{ 
+                                transform: `translateX(calc(-${currentIndex} * (100% + 30px) / ${visibleCount}))`
+                            }}
+                        >
+                            {profiles.map((profile, idx) => (
+                                <div className="profile-card" key={idx}>
+                                    <div className="profile-card-header">
+                                        <div className="profile-avatar" style={{ backgroundImage: `url('${profile.avatar}')` }}></div>
+                                        <span className="expert-badge" style={{ backgroundColor: profile.color }}>Expert</span>
+                                    </div>
+                                    <div className="profile-body">
+                                        <h3>{profile.name}</h3>
+                                        <p className="profile-title">{profile.role}</p>
+                                        <p className="profile-company">at <strong>{profile.company}</strong></p>
+                                        
+                                        <div className="profile-skills">
+                                            {profile.skills.map((skill, sIdx) => (
+                                                <span className="tag" key={sIdx}>{skill}</span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                    <div className="profile-footer">
+                                        <a href="#" className="view-profile-btn">View Profile &rarr;</a>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                </ScrollReveal>
+            </div>
+        </section>
+    );
+};
+
 const VideoTutorials = () => {
     const [showAll, setShowAll] = useState(false);
 
@@ -662,6 +817,7 @@ function App() {
                 <PopularTopics />
                 <FeaturedResources />
                 <ReportsSection />
+                <FeaturedProfiles />
                 <VideoTutorials />
                 <LatestBlogs />
                 <Newsletter />
