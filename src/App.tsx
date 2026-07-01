@@ -661,9 +661,9 @@ function App() {
                 <HeroSection />
                 <PopularTopics />
                 <FeaturedResources />
-                <LatestBlogs />
                 <ReportsSection />
                 <VideoTutorials />
+                <LatestBlogs />
                 <Newsletter />
             </main>
             <Footer />
