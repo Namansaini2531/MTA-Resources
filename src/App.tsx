@@ -66,37 +66,47 @@ const ScrollReveal = ({
     );
 };
 
-const Header = () => (
-    <header className="main-header">
-        <div className="container header-container">
-            <div className="logo-container">
-                <svg width="38" height="28" viewBox="0 0 84 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="header-logo-icon">
-                    {/* Teal / Mint Ring */}
-                    <circle cx="26" cy="38" r="12" stroke="#00a082" strokeWidth="3.5" fill="none" />
-                    <circle cx="26" cy="18" r="4" fill="#00a082" />
+const Header = () => {
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-                    {/* Charcoal Ring */}
-                    <circle cx="42" cy="38" r="12" stroke="#111111" strokeWidth="3.5" fill="none" />
-                    <circle cx="42" cy="18" r="4" fill="#111111" />
+    return (
+        <header className="main-header">
+            <div className="container header-container">
+                <div className="logo-container">
+                    <svg width="38" height="28" viewBox="0 0 84 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="header-logo-icon">
+                        {/* Teal / Mint Ring */}
+                        <circle cx="26" cy="38" r="12" stroke="#00a082" strokeWidth="3.5" fill="none" />
+                        <circle cx="26" cy="18" r="4" fill="#00a082" />
 
-                    {/* Coral / Orange Ring */}
-                    <circle cx="58" cy="38" r="12" stroke="#f15b24" strokeWidth="3.5" fill="none" />
-                    <circle cx="58" cy="18" r="4" fill="#f15b24" />
-                </svg>
-                <span className="logo-text">MarTechAdda</span>
+                        {/* Charcoal Ring */}
+                        <circle cx="42" cy="38" r="12" stroke="#111111" strokeWidth="3.5" fill="none" />
+                        <circle cx="42" cy="18" r="4" fill="#111111" />
+
+                        {/* Coral / Orange Ring */}
+                        <circle cx="58" cy="38" r="12" stroke="#f15b24" strokeWidth="3.5" fill="none" />
+                        <circle cx="58" cy="18" r="4" fill="#f15b24" />
+                    </svg>
+                    <span className="logo-text">MarTechAdda</span>
+                </div>
+                <nav className={`nav-links ${isMenuOpen ? 'mobile-open' : ''}`}>
+                    <a href="#" onClick={() => setIsMenuOpen(false)}>Marketing Services</a>
+                    <a href="#" onClick={() => setIsMenuOpen(false)}>How It Works</a>
+                    <a href="#" onClick={() => setIsMenuOpen(false)}>Resources</a>
+                    <a href="#" onClick={() => setIsMenuOpen(false)}>For Experts</a>
+                    <a href="#" className="login-link mobile-only-login" onClick={() => setIsMenuOpen(false)}>Login</a>
+                </nav>
+                <div className="header-actions">
+                    <a href="#" className="login-link desktop-only-login">Login</a>
+                    <button className="mobile-menu-toggle" onClick={() => setIsMenuOpen(!isMenuOpen)} aria-label="Toggle menu">
+                        <span className={`bar ${isMenuOpen ? 'open' : ''}`}></span>
+                        <span className={`bar ${isMenuOpen ? 'open' : ''}`}></span>
+                        <span className={`bar ${isMenuOpen ? 'open' : ''}`}></span>
+                    </button>
+                </div>
             </div>
-            <nav className="nav-links">
-                <a href="#">Marketing Services</a>
-                <a href="#">How It Works</a>
-                <a href="#">Resources</a>
-                <a href="#">For Experts</a>
-            </nav>
-            <div className="header-actions">
-                <a href="#" className="login-link">Login</a>
-            </div>
-        </div>
-    </header>
-);
+        </header>
+    );
+};
 
 const HeroSection = () => (
     <section className="hero-section">
