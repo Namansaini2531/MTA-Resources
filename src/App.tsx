@@ -1,6 +1,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import './index.css';
+import { resourcesData } from './data/resources';
 
 interface ScrollRevealProps {
     children: React.ReactNode;
@@ -306,85 +307,185 @@ const LatestBlogs = () => (
     </section>
 );
 
-const ReportsSection = () => (
-    <section className="reports-section bg-light">
-        <div className="container">
-            <ScrollReveal animation="slide-up">
-                <span className="section-label">RESOURCES</span>
-                <div className="section-header">
-                    <h2>E-books & Reports</h2>
-                    <a href="#" className="view-all-btn">View All &rarr;</a>
-                </div>
-            </ScrollReveal>
+const AllResourcesSection = () => {
+    const [activeCategory, setActiveCategory] = useState<string>('All');
+    const [searchQuery, setSearchQuery] = useState<string>('');
+    const [bookmarkedIds, setBookmarkedIds] = useState<Set<string>>(new Set());
+    const [visibleCount, setVisibleCount] = useState<number>(6);
+
+    const categories = ['All', 'Guides', 'Articles', 'Case Studies', 'E-books', 'Checklists'];
+
+    // Reset pagination limit when category or search changes
+    const handleCategoryChange = (category: string) => {
+        setActiveCategory(category);
+        setVisibleCount(6);
+    };
+
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchQuery(e.target.value);
+        setVisibleCount(6);
+    };
+
+    const clearSearch = () => {
+        setSearchQuery('');
+        setVisibleCount(6);
+    };
+
+    const toggleBookmark = (id: string) => {
+        setBookmarkedIds(prev => {
+            const next = new Set(prev);
+            if (next.has(id)) {
+                next.delete(id);
+            } else {
+                next.add(id);
+            }
+            return next;
+        });
+    };
+
+    // Filter resources (excluding Videos category)
+    const filteredResources = resourcesData.filter(item => {
+        if (item.category === 'Videos') return false;
+
+        const matchesCategory = activeCategory === 'All' || item.category === activeCategory;
+        const matchesSearch = searchQuery.trim() === '' || 
+            item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            item.description.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            item.subMeta.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            item.tag.toLowerCase().includes(searchQuery.toLowerCase());
             
-            {/* Top row - 2 large cards */}
-            <div className="reports-top-grid">
-                <ScrollReveal animation="slide-up" delay={100} className="resource-card-reveal">
-                    <div className="report-card large-card">
-                        <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&q=80&w=600')" }}></div>
-                        <div className="report-info">
-                            <p className="report-meta">Talent Intelligence &nbsp;|&nbsp; &lt;1 min</p>
-                            <h3>State Of Non-Tech Talent 2025</h3>
-                            <p className="report-desc">Discover real salary benchmarks from India's top product companies. The Product Tech PayCheck 2025 helps recruiters, HR teams, and founders win tech talent with confidence.</p>
-                            <a href="#" className="download-link">Download now <span className="arrow">↓</span></a>
-                        </div>
-                    </div>
-                </ScrollReveal>
-                
-                <ScrollReveal animation="slide-up" delay={200} className="resource-card-reveal">
-                    <div className="report-card large-card">
-                        <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&q=80&w=600')" }}></div>
-                        <div className="report-info">
-                            <p className="report-meta">Talent Intelligence &nbsp;|&nbsp; &lt;1 min</p>
-                            <h3>The 2025 Bharat Salary Index [Non-Tech Skills]</h3>
-                            <p className="report-desc">Compensation benchmarks and real salary data from top companies across India's industries.</p>
-                            <a href="#" className="download-link">Download now <span className="arrow">↓</span></a>
-                        </div>
-                    </div>
-                </ScrollReveal>
-            </div>
+        return matchesCategory && matchesSearch;
+    });
 
-            {/* Bottom row - 3 compact cards */}
-            <div className="reports-bottom-grid">
-                <ScrollReveal animation="slide-up" delay={100} className="resource-card-reveal">
-                    <div className="report-card compact-card">
-                        <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=600')" }}></div>
-                        <div className="report-info">
-                            <p className="report-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
-                            <h4>Product Tech PayCheck 2025</h4>
-                            <p className="report-desc">Discover real salary trends from 10,000+ verified offers across India's top product companies. Plan better offers and avoid...</p>
-                            <a href="#" className="download-link">Download now <span className="arrow">↓</span></a>
+    const displayedResources = filteredResources.slice(0, visibleCount);
+    const hasMore = filteredResources.length > visibleCount;
+
+    return (
+        <section className="resources-section">
+            <div className="container">
+                <ScrollReveal animation="slide-up">
+                    <div className="resources-header">
+                        <div className="resources-title-area">
+                            <h2>All Resources</h2>
+                            <p className="resources-found-count">
+                                {filteredResources.length} {filteredResources.length === 1 ? 'resource' : 'resources'} found
+                            </p>
                         </div>
-                    </div>
-                </ScrollReveal>
-                
-                <ScrollReveal animation="slide-up" delay={200} className="resource-card-reveal">
-                    <div className="report-card compact-card">
-                        <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=600')" }}></div>
-                        <div className="report-info">
-                            <p className="report-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
-                            <h4>State Of ITeS Tech Talent 2025</h4>
-                            <p className="report-desc">This report is the ultimate guide for hiring managers, recruiters, and HR professionals who want to stay ahead of the curve an...</p>
-                            <a href="#" className="download-link">Download now <span className="arrow">↓</span></a>
+                        <div className="search-container">
+                            <span className="search-icon">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                    <circle cx="11" cy="11" r="8"></circle>
+                                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                </svg>
+                            </span>
+                            <input
+                                type="text"
+                                className="search-input"
+                                placeholder="Search resources..."
+                                value={searchQuery}
+                                onChange={handleSearchChange}
+                            />
+                            {searchQuery && (
+                                <button className="search-clear-btn" onClick={clearSearch} aria-label="Clear search">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                                        <line x1="18" y1="6" x2="6" y2="18"></line>
+                                        <line x1="6" y1="6" x2="18" y2="18"></line>
+                                    </svg>
+                                </button>
+                            )}
                         </div>
                     </div>
                 </ScrollReveal>
 
-                <ScrollReveal animation="slide-up" delay={300} className="resource-card-reveal">
-                    <div className="report-card compact-card">
-                        <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=600')" }}></div>
-                        <div className="report-info">
-                            <p className="report-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
-                            <h4>Tech Salary Index 2025</h4>
-                            <p className="report-desc">This index is a highlight-filled quick reference for hiring managers, recruiters, and HR professionals who want to beat...</p>
-                            <a href="#" className="download-link">Download now <span className="arrow">↓</span></a>
-                        </div>
-                    </div>
+                <ScrollReveal animation="slide-up" delay={50}>
+                    <ul className="category-chips">
+                        {categories.map(cat => (
+                            <li
+                                key={cat}
+                                className={`category-chip ${activeCategory === cat ? 'selected' : ''}`}
+                                onClick={() => handleCategoryChange(cat)}
+                            >
+                                {cat}
+                            </li>
+                        ))}
+                    </ul>
                 </ScrollReveal>
+
+                <div className="resources-grid">
+                    {displayedResources.length > 0 ? (
+                        displayedResources.map((resource, idx) => {
+                            const isBookmarked = bookmarkedIds.has(resource.id);
+                            return (
+                                <ScrollReveal
+                                    key={resource.id}
+                                    animation="slide-up"
+                                    delay={(idx % 3) * 80}
+                                    className="resource-card-reveal"
+                                >
+                                    <div className="resource-item-card">
+                                        <div className="resource-image-container">
+                                            <div
+                                                className="resource-card-image"
+                                                style={{ backgroundImage: `url('${resource.imageUrl}')` }}
+                                            />
+                                            <span className="resource-overlay-badge">{resource.category}</span>
+                                            <button
+                                                className={`resource-bookmark-btn ${isBookmarked ? 'active' : ''}`}
+                                                onClick={() => toggleBookmark(resource.id)}
+                                                aria-label={isBookmarked ? "Remove bookmark" : "Bookmark resource"}
+                                            >
+                                                <svg
+                                                    width="18"
+                                                    height="18"
+                                                    viewBox="0 0 24 24"
+                                                    fill={isBookmarked ? "currentColor" : "none"}
+                                                    stroke="currentColor"
+                                                    strokeWidth="2"
+                                                    strokeLinecap="round"
+                                                    strokeLinejoin="round"
+                                                >
+                                                    <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path>
+                                                </svg>
+                                            </button>
+                                        </div>
+                                        <div className="resource-content">
+                                            <span className="resource-meta-label">{resource.subMeta}</span>
+                                            <h3 className="resource-item-title">{resource.title}</h3>
+                                            <p className="resource-item-desc">{resource.description}</p>
+                                        </div>
+                                    </div>
+                                </ScrollReveal>
+                            );
+                        })
+                    ) : (
+                        <div className="no-results">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" style={{ marginBottom: '16px', color: '#94a3b8' }}>
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                <line x1="8" y1="11" x2="14" y2="11"></line>
+                            </svg>
+                            <h3>No resources found</h3>
+                            <p>We couldn't find any resources matching "{searchQuery}". Try a different search term.</p>
+                        </div>
+                    )}
+                </div>
+
+                {hasMore && (
+                    <div className="load-more-container">
+                        <ScrollReveal animation="fade-in" delay={100}>
+                            <button
+                                className="load-more-btn"
+                                onClick={() => setVisibleCount(prev => prev + 6)}
+                            >
+                                Load More ↓
+                            </button>
+                        </ScrollReveal>
+                    </div>
+                )}
             </div>
-        </div>
-    </section>
-);
+        </section>
+    );
+};
 
 const FeaturedProfiles = () => {
     const profiles = [
@@ -541,152 +642,7 @@ const FeaturedProfiles = () => {
     );
 };
 
-const VideoTutorials = () => {
-    const [showAll, setShowAll] = useState(false);
 
-    const videos = [
-        {
-            title: "Website Walkthrough",
-            duration: "12:30",
-            views: "1.5K views",
-            date: "1 month ago",
-            category: "Platform",
-            channel: "MarTechAdda",
-            thumbnail: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=400",
-            avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100"
-        },
-        {
-            title: "How to Setup your MarTechAdda profile",
-            duration: "08:15",
-            views: "820 views",
-            date: "2 weeks ago",
-            category: "Setup",
-            channel: "MarTechAdda Academy",
-            thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=400",
-            avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=100"
-        },
-        {
-            title: "Personal Branding Masterclass",
-            duration: "15:45",
-            views: "4.2K views",
-            date: "6 months ago",
-            category: "Career",
-            channel: "Expert Series",
-            thumbnail: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=400",
-            avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=100"
-        },
-        {
-            title: "Tips to find the best Marketing expert",
-            duration: "10:05",
-            views: "3.1K views",
-            date: "4 weeks ago",
-            category: "Hiring",
-            channel: "MarTechAdda Business",
-            thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=400",
-            avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=100"
-        },
-        {
-            title: "Optimizing Your Platform Portfolio for Success",
-            duration: "11:20",
-            views: "1.8K views",
-            date: "5 days ago",
-            category: "Setup",
-            channel: "MarTechAdda Academy",
-            thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=400",
-            avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100"
-        },
-        {
-            title: "Advanced Hiring Strategies for Startups",
-            duration: "14:10",
-            views: "2.1K views",
-            date: "2 months ago",
-            category: "Hiring",
-            channel: "MarTechAdda Business",
-            thumbnail: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=400",
-            avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=100"
-        },
-        {
-            title: "Navigating Your Career in the AI Era",
-            duration: "18:30",
-            views: "5.7K views",
-            date: "3 weeks ago",
-            category: "Career",
-            channel: "Expert Series",
-            thumbnail: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=400",
-            avatar: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=100"
-        },
-        {
-            title: "Deep Dive into Platform Verification Badges",
-            duration: "09:45",
-            views: "920 views",
-            date: "6 days ago",
-            category: "Platform",
-            channel: "MarTechAdda",
-            thumbnail: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=400",
-            avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=100"
-        },
-        {
-            title: "Building Authority on MarTechAdda",
-            duration: "16:15",
-            views: "3.4K views",
-            date: "1 month ago",
-            category: "Career",
-            channel: "Expert Series",
-            thumbnail: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400",
-            avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=100"
-        },
-        {
-            title: "Hiring Agencies vs. Freelancers: Key Differences",
-            duration: "13:50",
-            views: "1.2K views",
-            date: "5 weeks ago",
-            category: "Hiring",
-            channel: "MarTechAdda Business",
-            thumbnail: "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=400",
-            avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100"
-        }
-    ];
-
-    const visibleVideos = showAll ? videos : videos.slice(0, 6);
-
-    return (
-        <section className="video-tutorials">
-            <div className="container">
-                <ScrollReveal animation="slide-up">
-                    <span className="section-label">LEARNING</span>
-                    <h2>Video Resources</h2>
-                </ScrollReveal>
-                <div className="videos-grid">
-                    {visibleVideos.map((video, idx) => (
-                        <ScrollReveal animation="slide-up" delay={(idx % 3) * 100} className="resource-card-reveal" key={idx}>
-                            <a href="https://youtube.com" target="_blank" rel="noreferrer" className="video-card">
-                                <div className="video-thumbnail" style={{ backgroundImage: `url('${video.thumbnail}')` }}>
-                                    <div className="play-icon">▶</div>
-                                    <span className="duration">{video.duration}</span>
-                                </div>
-                                <div className="video-details">
-                                    <div className="channel-avatar" style={{ backgroundImage: `url('${video.avatar}')` }}></div>
-                                    <div className="video-meta">
-                                        <h3 className="video-title">{video.title}</h3>
-                                        <p className="channel-name">{video.channel} • {video.category}</p>
-                                        <p className="video-stats">{video.views} • {video.date}</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </ScrollReveal>
-                    ))}
-                </div>
-                {!showAll && (
-                    <div className="center-cta">
-                        <ScrollReveal animation="fade-in" delay={150}>
-                            <button className="load-more-btn" onClick={() => setShowAll(true)}>Load More ↓</button>
-                        </ScrollReveal>
-                    </div>
-                )}
-            </div>
-        </section>
-    );
-};
 
 const Newsletter = () => (
     <section className="newsletter-section">
@@ -812,9 +768,8 @@ function App() {
                 <HeroSection />
                 <PopularTopics />
                 <FeaturedResources />
-                <ReportsSection />
+                <AllResourcesSection />
                 <FeaturedProfiles />
-                <VideoTutorials />
                 <LatestBlogs />
                 <Newsletter />
             </main>
