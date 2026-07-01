@@ -25,7 +25,8 @@ const ScrollReveal = ({
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setIsVisible(true);
-                    observer.unobserve(entry.target);
+                } else {
+                    setIsVisible(false);
                 }
             },
             {
