@@ -1,6 +1,65 @@
 
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './index.css';
+
+interface ScrollRevealProps {
+    children: React.ReactNode;
+    className?: string;
+    animation?: 'fade-in' | 'slide-up' | 'slide-down' | 'slide-left' | 'slide-right' | 'zoom-in';
+    delay?: number;
+    duration?: number;
+}
+
+const ScrollReveal = ({
+    children,
+    className = '',
+    animation = 'slide-up',
+    delay = 0,
+    duration = 800
+}: ScrollRevealProps) => {
+    const elementRef = useRef<HTMLDivElement>(null);
+    const [isVisible, setIsVisible] = useState(false);
+
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setIsVisible(true);
+                    observer.unobserve(entry.target);
+                }
+            },
+            {
+                threshold: 0.05,
+                rootMargin: '0px 0px -40px 0px'
+            }
+        );
+
+        if (elementRef.current) {
+            observer.observe(elementRef.current);
+        }
+
+        return () => {
+            if (elementRef.current) {
+                observer.unobserve(elementRef.current);
+            }
+        };
+    }, []);
+
+    const style: React.CSSProperties = {
+        transitionDuration: `${duration}ms`,
+        transitionDelay: `${delay}ms`,
+    };
+
+    return (
+        <div
+            ref={elementRef}
+            className={`reveal-element ${animation} ${isVisible ? 'active' : ''} ${className}`}
+            style={style}
+        >
+            {children}
+        </div>
+    );
+};
 
 const Header = () => (
     <header className="main-header">
@@ -37,12 +96,14 @@ const Header = () => (
 const HeroSection = () => (
     <section className="hero-section">
         <div className="container">
-            <div className="hero-banner" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=1200')" }}>
-                <div className="hero-content">
-                    <h1>Resource Center</h1>
-                    <p>Tools, insights, and inspirations about the world of work.</p>
+            <ScrollReveal animation="fade-in" duration={1000}>
+                <div className="hero-banner" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&q=80&w=1200')" }}>
+                    <div className="hero-content">
+                        <h1>Resource Center</h1>
+                        <p>Tools, insights, and inspirations about the world of work.</p>
+                    </div>
                 </div>
-            </div>
+            </ScrollReveal>
         </div>
     </section>
 );
@@ -50,14 +111,16 @@ const HeroSection = () => (
 const PopularTopics = () => (
     <section className="popular-topics">
         <div className="container">
-            <span className="section-label">TOPICS</span>
-            <h2>Explore popular topics</h2>
-            <div className="topic-chips">
-                <a href="#" className="chip">Marketing Automation</a>
-                <a href="#" className="chip">CRM & Analytics</a>
-                <a href="#" className="chip">Hiring MarTech Experts</a>
-                <a href="#" className="chip">MarTech Stack Audit</a>
-            </div>
+            <ScrollReveal animation="slide-up">
+                <span className="section-label">TOPICS</span>
+                <h2>Explore popular topics</h2>
+                <div className="topic-chips">
+                    <a href="#" className="chip">Marketing Automation</a>
+                    <a href="#" className="chip">CRM & Analytics</a>
+                    <a href="#" className="chip">Hiring MarTech Experts</a>
+                    <a href="#" className="chip">MarTech Stack Audit</a>
+                </div>
+            </ScrollReveal>
         </div>
     </section>
 );
@@ -65,67 +128,77 @@ const PopularTopics = () => (
 const FeaturedResources = () => (
     <section className="featured-resources-section">
         <div className="container">
-            <span className="section-label">HIGHLIGHTS</span>
-            <h2 className="featured-title">Featured Resources</h2>
+            <ScrollReveal animation="slide-up">
+                <span className="section-label">HIGHLIGHTS</span>
+                <h2 className="featured-title">Featured Resources</h2>
+            </ScrollReveal>
 
             {/* Top row - large highlighted resource */}
-            <div className="featured-hero">
-                <div className="featured-hero-image-container">
-                    <div className="featured-hero-image" style={{ backgroundImage: "url('/tandem_bicycle.png')" }}></div>
-                </div>
-                <div className="featured-hero-content">
-                    <div className="featured-tags">
-                        <span className="featured-tag">Hiring & Management</span>
-                        <span className="featured-tag">Article</span>
+            <ScrollReveal animation="slide-up" delay={100}>
+                <div className="featured-hero">
+                    <div className="featured-hero-image-container">
+                        <div className="featured-hero-image" style={{ backgroundImage: "url('/tandem_bicycle.png')" }}></div>
                     </div>
-                    <h3>How To Build a Successful Team in a Growing Small Business</h3>
-                    <p className="featured-date">Mar 30, 2026</p>
+                    <div className="featured-hero-content">
+                        <div className="featured-tags">
+                            <span className="featured-tag">Hiring & Management</span>
+                            <span className="featured-tag">Article</span>
+                        </div>
+                        <h3>How To Build a Successful Team in a Growing Small Business</h3>
+                        <p className="featured-date">Mar 30, 2026</p>
+                    </div>
                 </div>
-            </div>
+            </ScrollReveal>
 
             {/* Bottom row - 3 columns of card resources */}
             <div className="featured-cards-grid">
-                <a href="#" className="resource-card">
-                    <div className="resource-card-image-container">
-                        <div className="resource-card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?auto=format&fit=crop&q=80&w=600')" }}></div>
-                    </div>
-                    <div className="resource-card-content">
-                        <div className="featured-tags">
-                            <span className="featured-tag">Work & Career</span>
-                            <span className="featured-tag">Article</span>
+                <ScrollReveal animation="slide-up" delay={100} className="resource-card-reveal">
+                    <a href="#" className="resource-card">
+                        <div className="resource-card-image-container">
+                            <div className="resource-card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1531538606174-0f90ff5dce83?auto=format&fit=crop&q=80&w=600')" }}></div>
                         </div>
-                        <h4>How To Onboard a New Client: A Step-by-Step Guide</h4>
-                        <p className="featured-date">Apr 3, 2026</p>
-                    </div>
-                </a>
+                        <div className="resource-card-content">
+                            <div className="featured-tags">
+                                <span className="featured-tag">Work & Career</span>
+                                <span className="featured-tag">Article</span>
+                            </div>
+                            <h4>How To Onboard a New Client: A Step-by-Step Guide</h4>
+                            <p className="featured-date">Apr 3, 2026</p>
+                        </div>
+                    </a>
+                </ScrollReveal>
 
-                <a href="#" className="resource-card">
-                    <div className="resource-card-image-container">
-                        <div className="resource-card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600')" }}></div>
-                    </div>
-                    <div className="resource-card-content">
-                        <div className="featured-tags">
-                            <span className="featured-tag">AI Services</span>
-                            <span className="featured-tag">Article</span>
+                <ScrollReveal animation="slide-up" delay={200} className="resource-card-reveal">
+                    <a href="#" className="resource-card">
+                        <div className="resource-card-image-container">
+                            <div className="resource-card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=600')" }}></div>
                         </div>
-                        <h4>5 Ways Organizations Can Engage and Advance Women in the Workplace</h4>
-                        <p className="featured-date">Mar 24, 2026</p>
-                    </div>
-                </a>
+                        <div className="resource-card-content">
+                            <div className="featured-tags">
+                                <span className="featured-tag">AI Services</span>
+                                <span className="featured-tag">Article</span>
+                            </div>
+                            <h4>5 Ways Organizations Can Engage and Advance Women in the Workplace</h4>
+                            <p className="featured-date">Mar 24, 2026</p>
+                        </div>
+                    </a>
+                </ScrollReveal>
 
-                <a href="#" className="resource-card">
-                    <div className="resource-card-image-container">
-                        <div className="resource-card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=600')" }}></div>
-                    </div>
-                    <div className="resource-card-content">
-                        <div className="featured-tags">
-                            <span className="featured-tag">Work & Career</span>
-                            <span className="featured-tag">Article</span>
+                <ScrollReveal animation="slide-up" delay={300} className="resource-card-reveal">
+                    <a href="#" className="resource-card">
+                        <div className="resource-card-image-container">
+                            <div className="resource-card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&q=80&w=600')" }}></div>
                         </div>
-                        <h4>Build Better Client Relationships: 10 Communication Strategies for Freelancers</h4>
-                        <p className="featured-date">Apr 9, 2026</p>
-                    </div>
-                </a>
+                        <div className="resource-card-content">
+                            <div className="featured-tags">
+                                <span className="featured-tag">Work & Career</span>
+                                <span className="featured-tag">Article</span>
+                            </div>
+                            <h4>Build Better Client Relationships: 10 Communication Strategies for Freelancers</h4>
+                            <p className="featured-date">Apr 9, 2026</p>
+                        </div>
+                    </a>
+                </ScrollReveal>
             </div>
         </div>
     </section>
@@ -134,68 +207,84 @@ const FeaturedResources = () => (
 const LatestBlogs = () => (
     <section className="blogs-section">
         <div className="container">
-            <span className="section-label">BLOGS</span>
-            <div className="section-header">
-                <h2>Blogs</h2>
-                <a href="https://mar-tech-adda-blog-frontend-a4ql.vercel.app/" className="view-all-btn">View All &rarr;</a>
-            </div>
+            <ScrollReveal animation="slide-up">
+                <span className="section-label">BLOGS</span>
+                <div className="section-header">
+                    <h2>Blogs</h2>
+                    <a href="https://mar-tech-adda-blog-frontend-a4ql.vercel.app/" className="view-all-btn">View All &rarr;</a>
+                </div>
+            </ScrollReveal>
             <div className="blogs-layout">
                 {/* Left Column - Large Cards */}
                 <div className="blogs-left-col">
-                    <a href="#" className="large-blog-card">
-                        <div className="card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800')" }}></div>
-                        <div className="card-content-no-bg">
-                            <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
-                            <h3>GitHub Profile Checklist 2026: What Recruiters Actually Look At</h3>
-                            <p className="blog-desc">GitHub can be a powerful job-search asset — for freshers and career-switchers especially, it's often the proof that you can actually build things.</p>
-                        </div>
-                    </a>
-                    <a href="#" className="large-blog-card">
-                        <div className="card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800')" }}></div>
-                        <div className="card-content-no-bg">
-                            <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
-                            <h3>Resume Headline & Summary 2026: Examples, Templates & Action Verbs</h3>
-                            <p className="blog-desc">The top third of your resume gets read first and decides whether the rest gets read at all. This guide shows you the modern alternative.</p>
-                        </div>
-                    </a>
+                    <ScrollReveal animation="slide-up" delay={100}>
+                        <a href="#" className="large-blog-card">
+                            <div className="card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=800')" }}></div>
+                            <div className="card-content-no-bg">
+                                <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
+                                <h3>GitHub Profile Checklist 2026: What Recruiters Actually Look At</h3>
+                                <p className="blog-desc">GitHub can be a powerful job-search asset — for freshers and career-switchers especially, it's often the proof that you can actually build things.</p>
+                            </div>
+                        </a>
+                    </ScrollReveal>
+                    <ScrollReveal animation="slide-up" delay={200}>
+                        <a href="#" className="large-blog-card">
+                            <div className="card-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&q=80&w=800')" }}></div>
+                            <div className="card-content-no-bg">
+                                <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
+                                <h3>Resume Headline & Summary 2026: Examples, Templates & Action Verbs</h3>
+                                <p className="blog-desc">The top third of your resume gets read first and decides whether the rest gets read at all. This guide shows you the modern alternative.</p>
+                            </div>
+                        </a>
+                    </ScrollReveal>
                 </div>
                 {/* Right Column - Compact Cards */}
                 <div className="blogs-right-col">
-                    <a href="#" className="compact-blog-card">
-                        <div className="compact-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&q=80&w=200')" }}></div>
-                        <div className="compact-content">
-                            <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
-                            <h4>Product Manager Resume 2026: What Hiring Managers Actually Read</h4>
-                        </div>
-                    </a>
-                    <a href="#" className="compact-blog-card">
-                        <div className="compact-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=200')" }}></div>
-                        <div className="compact-content">
-                            <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
-                            <h4>LinkedIn Profile Optimization 2026: Get Recruiters to Message You</h4>
-                        </div>
-                    </a>
-                    <a href="#" className="compact-blog-card">
-                        <div className="compact-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=200')" }}></div>
-                        <div className="compact-content">
-                            <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
-                            <h4>Career Gap on Resume: How to Explain It Honestly (2026)</h4>
-                        </div>
-                    </a>
-                    <a href="#" className="compact-blog-card">
-                        <div className="compact-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=200')" }}></div>
-                        <div className="compact-content">
-                            <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
-                            <h4>How to List Projects on a Tech Resume (2026 Examples)</h4>
-                        </div>
-                    </a>
-                    <a href="#" className="compact-blog-card">
-                        <div className="compact-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=200')" }}></div>
-                        <div className="compact-content">
-                            <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
-                            <h4>Cover Letter for Indian Tech Jobs 2026: Template + When to Skip It</h4>
-                        </div>
-                    </a>
+                    <ScrollReveal animation="slide-up" delay={100}>
+                        <a href="#" className="compact-blog-card">
+                            <div className="compact-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&q=80&w=200')" }}></div>
+                            <div className="compact-content">
+                                <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
+                                <h4>Product Manager Resume 2026: What Hiring Managers Actually Read</h4>
+                            </div>
+                        </a>
+                    </ScrollReveal>
+                    <ScrollReveal animation="slide-up" delay={150}>
+                        <a href="#" className="compact-blog-card">
+                            <div className="compact-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=200')" }}></div>
+                            <div className="compact-content">
+                                <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
+                                <h4>LinkedIn Profile Optimization 2026: Get Recruiters to Message You</h4>
+                            </div>
+                        </a>
+                    </ScrollReveal>
+                    <ScrollReveal animation="slide-up" delay={200}>
+                        <a href="#" className="compact-blog-card">
+                            <div className="compact-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=200')" }}></div>
+                            <div className="compact-content">
+                                <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
+                                <h4>Career Gap on Resume: How to Explain It Honestly (2026)</h4>
+                            </div>
+                        </a>
+                    </ScrollReveal>
+                    <ScrollReveal animation="slide-up" delay={250}>
+                        <a href="#" className="compact-blog-card">
+                            <div className="compact-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&q=80&w=200')" }}></div>
+                            <div className="compact-content">
+                                <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
+                                <h4>How to List Projects on a Tech Resume (2026 Examples)</h4>
+                            </div>
+                        </a>
+                    </ScrollReveal>
+                    <ScrollReveal animation="slide-up" delay={300}>
+                        <a href="#" className="compact-blog-card">
+                            <div className="compact-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1450101499163-c8848c66ca85?auto=format&fit=crop&q=80&w=200')" }}></div>
+                            <div className="compact-content">
+                                <p className="blog-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
+                                <h4>Cover Letter for Indian Tech Jobs 2026: Template + When to Skip It</h4>
+                            </div>
+                        </a>
+                    </ScrollReveal>
                 </div>
             </div>
         </div>
@@ -205,66 +294,78 @@ const LatestBlogs = () => (
 const ReportsSection = () => (
     <section className="reports-section bg-light">
         <div className="container">
-            <span className="section-label">RESOURCES</span>
-            <div className="section-header">
-                <h2>E-books & Reports</h2>
-                <a href="#" className="view-all-btn">View All &rarr;</a>
-            </div>
+            <ScrollReveal animation="slide-up">
+                <span className="section-label">RESOURCES</span>
+                <div className="section-header">
+                    <h2>E-books & Reports</h2>
+                    <a href="#" className="view-all-btn">View All &rarr;</a>
+                </div>
+            </ScrollReveal>
             
             {/* Top row - 2 large cards */}
             <div className="reports-top-grid">
-                <div className="report-card large-card">
-                    <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&q=80&w=600')" }}></div>
-                    <div className="report-info">
-                        <p className="report-meta">Talent Intelligence &nbsp;|&nbsp; &lt;1 min</p>
-                        <h3>State Of Non-Tech Talent 2025</h3>
-                        <p className="report-desc">Discover real salary benchmarks from India's top product companies. The Product Tech PayCheck 2025 helps recruiters, HR teams, and founders win tech talent with confidence.</p>
-                        <a href="#" className="download-link">Download now <span className="arrow">↓</span></a>
+                <ScrollReveal animation="slide-up" delay={100} className="resource-card-reveal">
+                    <div className="report-card large-card">
+                        <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1559526324-4b87b5e36e44?auto=format&fit=crop&q=80&w=600')" }}></div>
+                        <div className="report-info">
+                            <p className="report-meta">Talent Intelligence &nbsp;|&nbsp; &lt;1 min</p>
+                            <h3>State Of Non-Tech Talent 2025</h3>
+                            <p className="report-desc">Discover real salary benchmarks from India's top product companies. The Product Tech PayCheck 2025 helps recruiters, HR teams, and founders win tech talent with confidence.</p>
+                            <a href="#" className="download-link">Download now <span className="arrow">↓</span></a>
+                        </div>
                     </div>
-                </div>
+                </ScrollReveal>
                 
-                <div className="report-card large-card">
-                    <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&q=80&w=600')" }}></div>
-                    <div className="report-info">
-                        <p className="report-meta">Talent Intelligence &nbsp;|&nbsp; &lt;1 min</p>
-                        <h3>The 2025 Bharat Salary Index [Non-Tech Skills]</h3>
-                        <p className="report-desc">Compensation benchmarks and real salary data from top companies across India's industries.</p>
-                        <a href="#" className="download-link">Download now <span className="arrow">↓</span></a>
+                <ScrollReveal animation="slide-up" delay={200} className="resource-card-reveal">
+                    <div className="report-card large-card">
+                        <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1526304640581-d334cdbbf45e?auto=format&fit=crop&q=80&w=600')" }}></div>
+                        <div className="report-info">
+                            <p className="report-meta">Talent Intelligence &nbsp;|&nbsp; &lt;1 min</p>
+                            <h3>The 2025 Bharat Salary Index [Non-Tech Skills]</h3>
+                            <p className="report-desc">Compensation benchmarks and real salary data from top companies across India's industries.</p>
+                            <a href="#" className="download-link">Download now <span className="arrow">↓</span></a>
+                        </div>
                     </div>
-                </div>
+                </ScrollReveal>
             </div>
 
             {/* Bottom row - 3 compact cards */}
             <div className="reports-bottom-grid">
-                <div className="report-card compact-card">
-                    <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=600')" }}></div>
-                    <div className="report-info">
-                        <p className="report-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
-                        <h4>Product Tech PayCheck 2025</h4>
-                        <p className="report-desc">Discover real salary trends from 10,000+ verified offers across India's top product companies. Plan better offers and avoid...</p>
-                        <a href="#" className="download-link">Download now <span className="arrow">↓</span></a>
+                <ScrollReveal animation="slide-up" delay={100} className="resource-card-reveal">
+                    <div className="report-card compact-card">
+                        <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&q=80&w=600')" }}></div>
+                        <div className="report-info">
+                            <p className="report-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
+                            <h4>Product Tech PayCheck 2025</h4>
+                            <p className="report-desc">Discover real salary trends from 10,000+ verified offers across India's top product companies. Plan better offers and avoid...</p>
+                            <a href="#" className="download-link">Download now <span className="arrow">↓</span></a>
+                        </div>
                     </div>
-                </div>
+                </ScrollReveal>
                 
-                <div className="report-card compact-card">
-                    <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=600')" }}></div>
-                    <div className="report-info">
-                        <p className="report-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
-                        <h4>State Of ITeS Tech Talent 2025</h4>
-                        <p className="report-desc">This report is the ultimate guide for hiring managers, recruiters, and HR professionals who want to stay ahead of the curve an...</p>
-                        <a href="#" className="download-link">Download now <span className="arrow">↓</span></a>
+                <ScrollReveal animation="slide-up" delay={200} className="resource-card-reveal">
+                    <div className="report-card compact-card">
+                        <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&q=80&w=600')" }}></div>
+                        <div className="report-info">
+                            <p className="report-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
+                            <h4>State Of ITeS Tech Talent 2025</h4>
+                            <p className="report-desc">This report is the ultimate guide for hiring managers, recruiters, and HR professionals who want to stay ahead of the curve an...</p>
+                            <a href="#" className="download-link">Download now <span className="arrow">↓</span></a>
+                        </div>
                     </div>
-                </div>
+                </ScrollReveal>
 
-                <div className="report-card compact-card">
-                    <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=600')" }}></div>
-                    <div className="report-info">
-                        <p className="report-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
-                        <h4>Tech Salary Index 2025</h4>
-                        <p className="report-desc">This index is a highlight-filled quick reference for hiring managers, recruiters, and HR professionals who want to beat...</p>
-                        <a href="#" className="download-link">Download now <span className="arrow">↓</span></a>
+                <ScrollReveal animation="slide-up" delay={300} className="resource-card-reveal">
+                    <div className="report-card compact-card">
+                        <div className="report-image" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=600')" }}></div>
+                        <div className="report-info">
+                            <p className="report-meta">Talent Intelligence &nbsp;|&nbsp; &lt; 1 min</p>
+                            <h4>Tech Salary Index 2025</h4>
+                            <p className="report-desc">This index is a highlight-filled quick reference for hiring managers, recruiters, and HR professionals who want to beat...</p>
+                            <a href="#" className="download-link">Download now <span className="arrow">↓</span></a>
+                        </div>
                     </div>
-                </div>
+                </ScrollReveal>
             </div>
         </div>
     </section>
@@ -381,29 +482,35 @@ const VideoTutorials = () => {
     return (
         <section className="video-tutorials">
             <div className="container">
-                <span className="section-label">LEARNING</span>
-                <h2>Video Resources</h2>
+                <ScrollReveal animation="slide-up">
+                    <span className="section-label">LEARNING</span>
+                    <h2>Video Resources</h2>
+                </ScrollReveal>
                 <div className="videos-grid">
                     {visibleVideos.map((video, idx) => (
-                        <a href="https://youtube.com" target="_blank" rel="noreferrer" className="video-card" key={idx}>
-                            <div className="video-thumbnail" style={{ backgroundImage: `url('${video.thumbnail}')` }}>
-                                <div className="play-icon">▶</div>
-                                <span className="duration">{video.duration}</span>
-                            </div>
-                            <div className="video-details">
-                                <div className="channel-avatar" style={{ backgroundImage: `url('${video.avatar}')` }}></div>
-                                <div className="video-meta">
-                                    <h3 className="video-title">{video.title}</h3>
-                                    <p className="channel-name">{video.channel} • {video.category}</p>
-                                    <p className="video-stats">{video.views} • {video.date}</p>
+                        <ScrollReveal animation="slide-up" delay={(idx % 3) * 100} className="resource-card-reveal" key={idx}>
+                            <a href="https://youtube.com" target="_blank" rel="noreferrer" className="video-card">
+                                <div className="video-thumbnail" style={{ backgroundImage: `url('${video.thumbnail}')` }}>
+                                    <div className="play-icon">▶</div>
+                                    <span className="duration">{video.duration}</span>
                                 </div>
-                            </div>
-                        </a>
+                                <div className="video-details">
+                                    <div className="channel-avatar" style={{ backgroundImage: `url('${video.avatar}')` }}></div>
+                                    <div className="video-meta">
+                                        <h3 className="video-title">{video.title}</h3>
+                                        <p className="channel-name">{video.channel} • {video.category}</p>
+                                        <p className="video-stats">{video.views} • {video.date}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </ScrollReveal>
                     ))}
                 </div>
                 {!showAll && (
                     <div className="center-cta">
-                        <button className="load-more-btn" onClick={() => setShowAll(true)}>Load More ↓</button>
+                        <ScrollReveal animation="fade-in" delay={150}>
+                            <button className="load-more-btn" onClick={() => setShowAll(true)}>Load More ↓</button>
+                        </ScrollReveal>
                     </div>
                 )}
             </div>
@@ -414,14 +521,16 @@ const VideoTutorials = () => {
 const Newsletter = () => (
     <section className="newsletter-section">
         <div className="container newsletter-container">
-            <div className="newsletter-content">
-                <h2>Stay ahead of the curve.</h2>
-                <p>Join 15,000+ MarTech leaders receiving our weekly strategic briefing on the future of marketing technology.</p>
-                <form className="newsletter-form" onSubmit={(e) => e.preventDefault()}>
-                    <input type="email" placeholder="work@company.com" required />
-                    <button type="submit" className="subscribe-btn">Subscribe Now</button>
-                </form>
-            </div>
+            <ScrollReveal animation="zoom-in" duration={1000}>
+                <div className="newsletter-content">
+                    <h2>Stay ahead of the curve.</h2>
+                    <p>Join 15,000+ MarTech leaders receiving our weekly strategic briefing on the future of marketing technology.</p>
+                    <form className="newsletter-form" onSubmit={(e) => e.preventDefault()}>
+                        <input type="email" placeholder="work@company.com" required />
+                        <button type="submit" className="subscribe-btn">Subscribe Now</button>
+                    </form>
+                </div>
+            </ScrollReveal>
         </div>
     </section>
 );

@@ -1264,3 +1264,42 @@ h4 {
         padding: 15px;
     }
 }
+
+/* Scroll Reveal Animations */
+.reveal-element {
+    opacity: 0;
+    transition-property: opacity, transform;
+    transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1);
+    will-change: transform, opacity;
+}
+
+.reveal-element.active {
+    opacity: 1;
+    transform: translate(0, 0) scale(1) !important;
+}
+
+.reveal-element.slide-up {
+    transform: translateY(45px);
+}
+
+.reveal-element.slide-down {
+    transform: translateY(-45px);
+}
+
+.reveal-element.slide-left {
+    transform: translateX(45px);
+}
+
+.reveal-element.slide-right {
+    transform: translateX(-45px);
+}
+
+.reveal-element.zoom-in {
+    transform: scale(0.96);
+}
+
+.resource-card-reveal {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
