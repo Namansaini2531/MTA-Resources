@@ -9,7 +9,7 @@ export interface ResourceItem {
   tag: string;
 }
 
-export const resourcesData: ResourceItem[] = [
+const rawResources: ResourceItem[] = [
   // ================= GUIDES (12 items) =================
   {
     id: 'g1',
@@ -742,3 +742,38 @@ export const resourcesData: ResourceItem[] = [
     tag: 'Outbound Stack'
   }
 ];
+
+export const resourcesData: ResourceItem[] = (() => {
+  const groups: Record<string, ResourceItem[]> = {
+    'Guides': [],
+    'Articles': [],
+    'Case Studies': [],
+    'E-books': [],
+    'Videos': [],
+    'Checklists': []
+  };
+  
+  rawResources.forEach(item => {
+    groups[item.category].push(item);
+  });
+  
+  const mixed: ResourceItem[] = [];
+  const maxLength = Math.max(
+    groups['Guides'].length,
+    groups['Articles'].length,
+    groups['Case Studies'].length,
+    groups['E-books'].length,
+    groups['Checklists'].length
+  );
+  
+  for (let i = 0; i < maxLength; i++) {
+    if (groups['Guides'][i]) mixed.push(groups['Guides'][i]);
+    if (groups['Articles'][i]) mixed.push(groups['Articles'][i]);
+    if (groups['Case Studies'][i]) mixed.push(groups['Case Studies'][i]);
+    if (groups['E-books'][i]) mixed.push(groups['E-books'][i]);
+    if (groups['Checklists'][i]) mixed.push(groups['Checklists'][i]);
+  }
+  
+  return mixed;
+})();
+
