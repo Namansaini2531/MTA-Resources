@@ -473,7 +473,7 @@ h4 {
 
 .chip {
     padding: 10px 20px;
-    background-color: var(--secondary-color);
+    background-color: var(--primary-color);
     color: white;
     border-radius: 30px;
     font-weight: 600;
@@ -482,9 +482,33 @@ h4 {
 }
 
 .chip:hover {
-    background-color: #00876c;
+    background-color: #e04445;
     transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(255, 78, 80, 0.24);
+}
+
+.chip-orange {
+    background-color: #f15b24;
+}
+.chip-orange:hover {
+    background-color: #e04f1e;
+    box-shadow: 0 4px 12px rgba(241, 91, 36, 0.2);
+}
+
+.chip-teal {
+    background-color: #00a082;
+}
+.chip-teal:hover {
+    background-color: #00876c;
     box-shadow: 0 4px 12px rgba(0, 160, 130, 0.2);
+}
+
+.chip-charcoal {
+    background-color: #111111;
+}
+.chip-charcoal:hover {
+    background-color: #222222;
+    box-shadow: 0 4px 12px rgba(17, 17, 17, 0.2);
 }
 
 /* General Tags */
