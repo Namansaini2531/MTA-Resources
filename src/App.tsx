@@ -25,7 +25,12 @@ const ScrollReveal = ({
             ([entry]) => {
                 if (entry.isIntersecting) {
                     setIsVisible(true);
-                    observer.unobserve(entry.target);
+                } else {
+                    // Only reset animation state if the element exits through the bottom of the viewport (scrolling up)
+                    const exitedBottom = entry.boundingClientRect.top > window.innerHeight / 2;
+                    if (exitedBottom) {
+                        setIsVisible(false);
+                    }
                 }
             },
             {
