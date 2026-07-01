@@ -19,32 +19,13 @@ const ScrollReveal = ({
 }: ScrollRevealProps) => {
     const elementRef = useRef<HTMLDivElement>(null);
     const [isVisible, setIsVisible] = useState(false);
-    const [currentAnimation, setCurrentAnimation] = useState(animation);
-
-    useEffect(() => {
-        setCurrentAnimation(animation);
-    }, [animation]);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
             ([entry]) => {
                 if (entry.isIntersecting) {
-                    const enteredFromTop = entry.boundingClientRect.top < window.innerHeight / 2;
-                    
-                    if (enteredFromTop && animation === 'slide-up') {
-                        setCurrentAnimation('slide-down');
-                    } else if (!enteredFromTop && animation === 'slide-up') {
-                        setCurrentAnimation('slide-up');
-                    } else if (enteredFromTop && animation === 'slide-down') {
-                        setCurrentAnimation('slide-up');
-                    } else if (!enteredFromTop && animation === 'slide-down') {
-                        setCurrentAnimation('slide-down');
-                    } else {
-                        setCurrentAnimation(animation);
-                    }
                     setIsVisible(true);
-                } else {
-                    setIsVisible(false);
+                    observer.unobserve(entry.target);
                 }
             },
             {
@@ -62,7 +43,7 @@ const ScrollReveal = ({
                 observer.unobserve(elementRef.current);
             }
         };
-    }, [animation]);
+    }, []);
 
     const style: React.CSSProperties = {
         transitionDuration: `${duration}ms`,
@@ -72,7 +53,7 @@ const ScrollReveal = ({
     return (
         <div
             ref={elementRef}
-            className={`reveal-element ${currentAnimation} ${isVisible ? 'active' : ''} ${className}`}
+            className={`reveal-element ${animation} ${isVisible ? 'active' : ''} ${className}`}
             style={style}
         >
             {children}
