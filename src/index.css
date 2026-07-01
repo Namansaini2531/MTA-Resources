@@ -1269,7 +1269,7 @@ h4 {
 .reveal-element {
     opacity: 0;
     transition-property: opacity, transform;
-    transition-timing-function: cubic-bezier(0.215, 0.610, 0.355, 1);
+    transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
     will-change: transform, opacity;
 }
 
@@ -1279,23 +1279,23 @@ h4 {
 }
 
 .reveal-element.slide-up {
-    transform: translateY(45px);
+    transform: translateY(30px);
 }
 
 .reveal-element.slide-down {
-    transform: translateY(-45px);
+    transform: translateY(-30px);
 }
 
 .reveal-element.slide-left {
-    transform: translateX(45px);
+    transform: translateX(30px);
 }
 
 .reveal-element.slide-right {
-    transform: translateX(-45px);
+    transform: translateX(-30px);
 }
 
 .reveal-element.zoom-in {
-    transform: scale(0.96);
+    transform: scale(0.98);
 }
 
 .resource-card-reveal {
