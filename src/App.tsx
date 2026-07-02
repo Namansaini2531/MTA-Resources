@@ -245,6 +245,153 @@ const FeaturedResources = ({ onSelectArticle }: FeaturedResourcesProps) => (
     </section>
 );
 
+const VideoTutorials = () => {
+    const [showAll, setShowAll] = useState(false);
+
+    const videos = [
+        {
+            title: "Website Walkthrough",
+            duration: "12:30",
+            views: "1.5K views",
+            date: "1 month ago",
+            category: "Platform",
+            channel: "MarTechAdda",
+            thumbnail: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?auto=format&fit=crop&q=80&w=400",
+            avatar: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&q=80&w=100"
+        },
+        {
+            title: "How to Setup your MarTechAdda profile",
+            duration: "08:15",
+            views: "820 views",
+            date: "2 weeks ago",
+            category: "Setup",
+            channel: "MarTechAdda Academy",
+            thumbnail: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&q=80&w=400",
+            avatar: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=100"
+        },
+        {
+            title: "Personal Branding Masterclass",
+            duration: "15:45",
+            views: "4.2K views",
+            date: "6 months ago",
+            category: "Career",
+            channel: "Expert Series",
+            thumbnail: "https://images.unsplash.com/photo-1507679799987-c73779587ccf?auto=format&fit=crop&q=80&w=400",
+            avatar: "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=100"
+        },
+        {
+            title: "Tips to find the best Marketing expert",
+            duration: "10:05",
+            views: "3.1K views",
+            date: "4 weeks ago",
+            category: "Hiring",
+            channel: "MarTechAdda Business",
+            thumbnail: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=400",
+            avatar: "https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&q=80&w=100"
+        },
+        {
+            title: "Optimizing Your Platform Portfolio for Success",
+            duration: "11:20",
+            views: "1.8K views",
+            date: "5 days ago",
+            category: "Setup",
+            channel: "MarTechAdda Academy",
+            thumbnail: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=400",
+            avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=100"
+        },
+        {
+            title: "Advanced Hiring Strategies for Startups",
+            duration: "14:10",
+            views: "2.1K views",
+            date: "2 months ago",
+            category: "Hiring",
+            channel: "MarTechAdda Business",
+            thumbnail: "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&q=80&w=400",
+            avatar: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&q=80&w=100"
+        },
+        {
+            title: "Navigating Your Career in the AI Era",
+            duration: "18:30",
+            views: "5.7K views",
+            date: "3 weeks ago",
+            category: "Career",
+            channel: "Expert Series",
+            thumbnail: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&q=80&w=400",
+            avatar: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?auto=format&fit=crop&q=80&w=100"
+        },
+        {
+            title: "Deep Dive into Platform Verification Badges",
+            duration: "09:45",
+            views: "920 views",
+            date: "6 days ago",
+            category: "Platform",
+            channel: "MarTechAdda",
+            thumbnail: "https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&q=80&w=400",
+            avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=100"
+        },
+        {
+            title: "Building Authority on MarTechAdda",
+            duration: "16:15",
+            views: "3.4K views",
+            date: "1 month ago",
+            category: "Career",
+            channel: "Expert Series",
+            thumbnail: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?auto=format&fit=crop&q=80&w=400",
+            avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&q=80&w=100"
+        },
+        {
+            title: "Hiring Agencies vs. Freelancers: Key Differences",
+            duration: "13:50",
+            views: "1.2K views",
+            date: "5 weeks ago",
+            category: "Hiring",
+            channel: "MarTechAdda Business",
+            thumbnail: "https://images.unsplash.com/photo-1556761175-b413da4baf72?auto=format&fit=crop&q=80&w=400",
+            avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&q=80&w=100"
+        }
+    ];
+
+    const visibleVideos = showAll ? videos : videos.slice(0, 6);
+
+    return (
+        <section className="video-tutorials">
+            <div className="container">
+                <ScrollReveal animation="slide-up">
+                    <span className="section-label">LEARNING</span>
+                    <h2>Video Resources</h2>
+                </ScrollReveal>
+                <div className="videos-grid">
+                    {visibleVideos.map((video, idx) => (
+                        <ScrollReveal animation="slide-up" delay={(idx % 3) * 100} className="resource-card-reveal" key={idx}>
+                            <a href="https://youtube.com" target="_blank" rel="noreferrer" className="video-card">
+                                <div className="video-thumbnail" style={{ backgroundImage: `url('${video.thumbnail}')` }}>
+                                    <div className="play-icon">▶</div>
+                                    <span className="duration">{video.duration}</span>
+                                </div>
+                                <div className="video-details">
+                                    <div className="channel-avatar" style={{ backgroundImage: `url('${video.avatar}')` }}></div>
+                                    <div className="video-meta">
+                                        <h3 className="video-title">{video.title}</h3>
+                                        <p className="channel-name">{video.channel} • {video.category}</p>
+                                        <p className="video-stats">{video.views} • {video.date}</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </ScrollReveal>
+                    ))}
+                </div>
+                {!showAll && (
+                    <div className="center-cta">
+                        <ScrollReveal animation="fade-in" delay={150}>
+                            <button className="load-more-btn" onClick={() => setShowAll(true)}>Load More ↓</button>
+                        </ScrollReveal>
+                    </div>
+                )}
+            </div>
+        </section>
+    );
+};
+
 const LatestBlogs = () => (
     <section className="blogs-section">
         <div className="container">
@@ -1146,6 +1293,7 @@ function App() {
                         <FeaturedResources onSelectArticle={handleSelectArticle} />
                         <AllResourcesSection onSelectArticle={handleSelectArticle} />
                         <FeaturedProfiles />
+                        <VideoTutorials />
                         <LatestBlogs />
                         <Newsletter />
                     </>
